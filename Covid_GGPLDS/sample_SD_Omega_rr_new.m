@@ -1,14 +1,15 @@
-function [D,S,S0,l4,omega,rr] = sample_SD_Omega_rr_new(y, W, Z, Phi_prime, S0, S, D, omega, rr, l4, Model_hyper_params, Model_properties)
+function [D,S,S0,l4,l5,alpha_r,beta_r,omega,rr] = sample_SD_Omega_rr_new(y, W, Z, Phi_prime, S0, S, D, omega, rr, l4,l5,alpha_r,beta_r, Model_hyper_params, Model_properties)
     %y= data;
     T = Model_properties.T; 
     K = Model_properties.K;
+    
     X_dim_S = Model_properties.X_dim_S;
     N = Model_properties.N;
     K_prime = Model_properties.K_prime;
    S_0 = [S0 S(:,1:T-1)];
    Truncation = 5;
-   alpha_r = Model_hyper_params.alpha_r;
-   beta_r = Model_hyper_params.beta_r;
+   alpha_r0 = Model_hyper_params.alpha_r;
+   beta_r0 = Model_hyper_params.beta_r;
    
     
     
@@ -79,16 +80,23 @@ function [D,S,S0,l4,omega,rr] = sample_SD_Omega_rr_new(y, W, Z, Phi_prime, S0, S
            l4(p,t) = CRT_sum_mex(par1,par2);
         end
     end
-    Psi = D * S;
+   
+    zetta = D * S;
     %%%%% samplr rr
+    
+    
+    p_4 = sum(sum(logOnePlusExp(zetta),2));
+    p_hat = p_4/(beta_r+p_4);
     l4_ss = sum(sum(l4,2));
+    l5 = CRT_sum_mex(l4_ss,alpha_r);
+    alpha_r = gamrnd(alpha_r0+l5,1/(beta_r0-log(1-p_hat)));
+    beta_r = gamrnd(alpha_r0+alpha_r,1/(beta_r0+rr));
     par1 = l4_ss + alpha_r;
-    p4 = sum( sum(log(1+exp(Psi)),2));
-    par2 =1/(beta_r+p4);
-    rr = gamrnd(par1,par2)
+    %p4 = sum( sum(log(1+exp(Psi)),2));
+    par2 =1/(beta_r+p_4);
+    rr = gamrnd(par1,par2);
     
-    
-    
+   
     
     %%%%%% sample dk
 %     F1 = omega * (S.^2)' ;
