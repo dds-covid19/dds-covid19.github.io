@@ -5,7 +5,7 @@ addAllToPath()
 %chose the dataset
 dataset_name = 'Covid19_newcases'% 'Lorenz','Pedestrian','Stock'
 %chose the task
-task = 'prediction_future'% 'interpretation','predeiction_historic', 'prediction_future'
+task = 'predeiction_historic'% 'interpretation','predeiction_historic', 'prediction_future'
 % data reconstruction (time consuming due to Kalman smoothing)
 data_reconstruction_flag = 'no'% 'yes','no'
 
@@ -87,14 +87,18 @@ elseif strcmp(dataset_name,'FHZ')
  elseif strcmp(dataset_name,'Covid19_newcases')
     %load('data/Covid19_newcase.mat')
     TT = readtable('data/new_death_cases.csv');
-    data =TT{2:end,3:end};
+    data =TT(1:end,[1,55:size(TT,2)]);
+    data1 =TT{2:end,55:end};
     data6=[];
-    data6=[data6; cellfun(@str2num, data(:,1:end))];
-    T_initial = 54; 
-    data5=data6(:,T_initial-1:end);
-    TT{2:end,3:end}=num2cell(data6);
-    TT(end+1,1)=cellstr('US');
-    TT{end,3:end}=num2cell(sum(data6,1));
+    data6=[data6; cellfun(@str2num, data1(:,1:end))];
+    T_initial = 2; 
+    data5=data6;
+    data{2:end,2:end}=num2cell(data6);
+    data(end+1,1)=cellstr('US');
+    data{end,2:end}=num2cell(sum(data6,1));
+%     TT{2:end,3:end}=num2cell(data6);
+%     TT(end+1,1)=cellstr('US');
+%     TT{end,3:end}=num2cell(sum(data6,1));
    
     %data5(52,:)=sum(data5,1);
     %data5=data5(:,55:end);
@@ -175,15 +179,10 @@ if ~ strcmp(dataset_name,'Covid19_newcases')
         X_w{i}= (X_w{i}-MMM);%./SSS';
     end
 end
-for i = 1:size(mean_plot,1)
-    subplot(ceil(size(mean_plot,1)/3),ceil(size(mean_plot,1)/ceil(size(mean_plot,1)/3)),i)
-    plot(mean_plot(i,:))
-    title(sprintf('observation dimension %d ',i));
-    legend('Real')
-end
+
 Model_properties.N =N;
 Model_properties.N_sum = sum(N);
-figure();
+
 if ~ strcmp(dataset_name,'Covid19_newcases') 
     Sparsity_ratio = (0.48)*rand(1)+0.08;
 else
@@ -234,6 +233,7 @@ l1 = randi([0,1],K,K_prime);
 l2 = randi([0,1],K_prime,K);
 l3 = randi(K_prime,1);
 l4 = randi([0,5],X_dim_S,T_S);
+l5 = 0;
 omega = rand(X_dim_S,T_S);
 rho = rand(K,1);
 tao = rand(K,1);
@@ -246,6 +246,8 @@ e=ones(K_prime,1);
 f=ones(K_prime,1);
 g=1;
 Phi_prime= zeros(K);
+alpha_r = 48;
+beta_r =1; 
 
 % initilatation of model hyper parameters 
 %Model_hyper_params.a0 = 1;
@@ -335,7 +337,8 @@ for iteration = 1:Max_MCMC
         [D,S,S0] = sample_SD(X,W,Z,Phi_prime,S0,S,D,Lambda,Phi,Model_hyper_params,Model_properties);
     else
         yy = data5(:,1:T);
-        [D,S,S0,l4,omega,rr] = sample_SD_Omega_rr_new(yy, W, Z, Phi_prime, S0, S, D, omega, rr, l4, Model_hyper_params, Model_properties);
+        [D,S,S0,l4,l5,alpha_r,beta_r,omega,rr] = sample_SD_Omega_rr_new(yy, W, Z, Phi_prime, S0, S, D, omega, rr, l4,l5,alpha_r,beta_r, Model_hyper_params, Model_properties);
+        %[D,S,S0,l4,omega,rr] = sample_SD_Omega_rr_new(yy, W, Z, Phi_prime, S0, S, D, omega, rr, l4, Model_hyper_params, Model_properties);
     end
 
 
@@ -635,7 +638,7 @@ else
         state_means = squeeze(mean(squeeze(mean(XP_temp,2)),3));
         
         US_total_obse = sum(data5(:,1:T_S),1);
-        
+        US_recon_avg = squeeze(sum(X_recon_avg,1));
         US_total_pred = (sum(XP_temp,1));
         XP_temp =cat(1,XP_temp,US_total_pred);
         US_total_pred = permute(squeeze(US_total_pred),[1 3 2]);
@@ -715,32 +718,32 @@ else
             hold on 
             xline(T_S,'--k');
             hold off
-            title(sprintf(string(TT{i+1,1})));
+            title(sprintf(string(data{i+1,1})));
             legend('Predicted1_','Predicted2_','Real','');
-            File_name1 = string(TT{i+1,1});
+            File_name1 = string(data{i+1,1});
             saveas(gcf,sprintf('%s%s%s%s%s%s %f %s %d.jpg',Folder_name,'/',Folder_name1,'/',File_name1,'_prediction_',portion,'_K',K))
         end
         
         if strcmp(task,'predeiction_historic')
-            T_means = TT;
-            T_upperbound = TT;
-            T_lowerbound = TT;
-            T_means{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(state_means);
-            T_upperbound{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(state_upperBound);
-            T_lowerbound{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(state_lowerBound);
+            T_means = data;
+            T_upperbound = data;
+            T_lowerbound = data;
+            T_means{2:end,T_initial:T_initial+T_S+T_P-1}=num2cell(MyX);
+            T_lowerbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_lowerBound);
+            T_upperbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_upperBound);
             
         elseif strcmp(task,'prediction_future')
-            T_means = TT;
-            T_upperbound = TT;
-            T_lowerbound = TT;
-            last_day = datetime(TT{1,end},'Format', 'MM/dd/yy');
+            T_means = data;
+            T_upperbound = data;
+            T_lowerbound = data;
+            last_day = datetime(data{1,end},'Format', 'MM/dd/yy');
             last_pred_day = daysadd(last_day,7);
-            T_means{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
-            T_means{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(state_means);
+            T_means{1,T_initial+T_S+1:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
+            T_means{2:end,T_initial:T_initial+T_S+T_P}=num2cell(MyX);
             T_upperbound{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
-            T_upperbound{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(state_upperBound);
-            T_lowerbound{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
-            T_lowerbound{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(state_lowerBound);
+            T_upperbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_upperBound);
+            T_lowerbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cel;lstr(last_day+1:last_pred_day);
+            T_lowerbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_lowerBound);
         end
         
         filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_mean_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
