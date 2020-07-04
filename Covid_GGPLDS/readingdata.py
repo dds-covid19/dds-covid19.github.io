@@ -35,21 +35,21 @@ new_daily_cases.to_csv ('data/new_daily_cases.csv', index = True, header=True)
 
 death_mean = pd.read_csv('results/Historic_prediction/death_mean_.csv')
 death_mean = death_mean.rename(columns=death_mean.loc[0,:])
-death_mean=(death_mean.drop(index=0)).drop('01/22/0020',axis=1)
+death_mean=(death_mean.drop(index=0))#.drop('01/22/0020',axis=1)
 death_lower = pd.read_csv('results/Historic_prediction/death_lowerBound_.csv')
 death_lower = death_lower.rename(columns=death_lower.loc[0,:])
-death_lower = (death_lower.drop(index=0)).drop('01/22/0020',axis=1)
+death_lower = (death_lower.drop(index=0))#.drop('01/22/0020',axis=1)
 death_higher = pd.read_csv('results/Historic_prediction/death_upperBound_.csv')
 death_higher = death_higher.rename(columns=death_higher.loc[0,:])
-death_higher = (death_higher.drop(index=0)).drop('01/22/0020',axis=1)
+death_higher = (death_higher.drop(index=0))#.drop('01/22/0020',axis=1)
 for i in range(1,53):
-    death_mean.loc[i,'1/23/20':] =  pd.to_numeric(death_mean.loc[i,'1/23/20':],errors='coerce')
-    death_lower.loc[i,'1/23/20':] =  pd.to_numeric(death_lower.loc[i,'1/23/20':],errors='coerce')
-    death_higher.loc[i,'1/23/20':] =  pd.to_numeric(death_higher.loc[i,'1/23/20':],errors='coerce')
+    death_mean.loc[i,'3/15/20':] =  pd.to_numeric(death_mean.loc[i,'3/15/20':],errors='coerce')
+    death_lower.loc[i,'3/15/20':] =  pd.to_numeric(death_lower.loc[i,'3/15/20':],errors='coerce')
+    death_higher.loc[i,'3/15/20':] =  pd.to_numeric(death_higher.loc[i,'3/15/20':],errors='coerce')
     
-death_mean.to_csv ('results/Historic_prediction/death_mean_.csv', index = True, header=True)
-death_lower.to_csv ('results/Historic_prediction/death_lowerBound_.csv', index = True, header=True)
-death_higher.to_csv ('results/Historic_prediction/death_upperBound_.csv', index = True, header=True)
+death_mean.to_csv ('results/Historic_prediction/death_mean_.csv', index = False, header=True)
+death_lower.to_csv ('results/Historic_prediction/death_lowerBound_.csv', index = False, header=True)
+death_higher.to_csv ('results/Historic_prediction/death_upperBound_.csv', index = False, header=True)
 
 death_mean = pd.read_csv('results/Future_prediction/death_mean_.csv')
 death_mean = death_mean.rename(columns=death_mean.loc[0,:])
@@ -64,6 +64,7 @@ for i in range(1,53):
     death_mean.loc[i,'1/23/20':] =  pd.to_numeric(death_mean.loc[i,'1/23/20':],errors='coerce')
     death_lower.loc[i,'1/23/20':] =  pd.to_numeric(death_lower.loc[i,'1/23/20':],errors='coerce')
     death_higher.loc[i,'1/23/20':] =  pd.to_numeric(death_higher.loc[i,'1/23/20':],errors='coerce')
+    
     
 death_mean.to_csv ('results/Future_prediction/death_mean_.csv', index = True, header=True)
 death_lower.to_csv ('results/Future_prediction/death_lowerBound_.csv', index = True, header=True)

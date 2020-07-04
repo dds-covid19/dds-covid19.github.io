@@ -1,11 +1,3 @@
-#!/usr/bin/env python2
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jun 30 20:52:58 2020
-
-@author: rahikalantari
-"""
-
 import plotly.graph_objects as go
 
 import pandas as pd
@@ -124,3 +116,78 @@ fig.update_layout(
     ])
 
 fig.show()
+
+
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+#df = pd.read_csv('https://plotly.github.io/datasets/country_indicators.csv')
+
+df = pd.read_csv('../data/new_death_cases.csv')
+del df['1/22/20']
+df.loc[51] = df.sum(axis=0)
+df["Province_State"].loc[51] = "US"
+US =df.loc[51][1:]
+
+
+State_Names = df['Province_State'].tolist()
+
+
+Total = pd.DataFrame(data=US)
+Total['Date']=Total.index
+Total = Total.rename(columns={51: "Number of Deaths"})
+
+fig = go.Figure()
+
+for i in np.arange(52):
+    
+    state =df.loc[i][1:]
+    state = pd.DataFrame(data=state)
+    state = state.rename(columns={i: "Number of Deaths"})
+    
+    fig.add_trace(
+        go.Scatter(
+            x = state.index,
+            y = state["Number of Deaths"],
+            name = State_Names[i]
+        )
+    )
+
+#drop=np.array[]
+#for i in np.arange(52):
+#    visible = np.full(52,False)
+#    visible[i]=True
+#    a=dict(label = 'All',
+#            method = 'update',
+#            args = [{'visible': visible},
+#                  {'title': State_Names[i],
+#                   'showlegend':True}])
+#    if i==0:
+#        drop=list(a)
+#    else:
+#        drop.append(a)
+        
+        
+list_updatemenus = []
+for i in np.arange(52):
+    visible = np.full(52,False)
+    visible[i] = True
+    temp_dict = dict(label = State_Names[i],
+                 method = 'update',
+                 args = [{'visible': visible},
+                         {'title': State_Names[i]}])
+    list_updatemenus.append(temp_dict)
+    
+
+    
+fig.update_layout(
+    updatemenus=[go.layout.Updatemenu(
+        active=0,
+        buttons=list_updatemenus,
+        )
+    ])
+
+        
+#fig.show()            
+fig.write_html("../images/fig.html")
