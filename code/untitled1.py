@@ -29,11 +29,11 @@ for i in range (52):
     y_lower = temp['number_of_deaths_lower'].iloc[-7:]
     y_higher = temp['number_of_deaths_higher'].iloc[-7:]
    
-    x_fit = temp['date'].iloc[52:-7]
-    y_fit = temp['number_of_deaths_higher'].iloc[52:-7]
+    x_fit = temp['date'].iloc[53:-7]
+    y_fit = temp['number_of_deaths'].iloc[53:-7]
     
     x_real = temp['date']
-    y_real = temp['number_of_deaths']
+    y_real = temp['real_number_of_deaths']
 
     
     
@@ -42,13 +42,15 @@ for i in range (52):
         y=y_real,
         name= state_names[i]+' Real data',
     ))
+    
+    if i<51:
      
-    fig.add_trace(go.Scatter(
-        x=x_fit,
-        y=y_fit,
-        name = state_names[i]+' fit data', # Style name/legend entry with html tags
-        connectgaps=True # override default to connect the gaps
-    ))
+        fig.add_trace(go.Scatter(
+            x=x_fit,
+            y=y_fit,
+            name = state_names[i]+' fit data', # Style name/legend entry with html tags
+            connectgaps=True # override default to connect the gaps
+        ))
      
     fig.add_trace(go.Scatter(
         x=x_prediction,
@@ -62,6 +64,7 @@ for i in range (52):
         y=y_lower,
         mode='lines',
         line=dict(width=0.5, color='rgb(131, 90, 241)'),
+        #stackgroup='one',
         name = state_names[i] + ' Lowe bound', # Style name/legend entry with html tags
         connectgaps=True # override default to connect the gaps
     ))
@@ -72,7 +75,8 @@ for i in range (52):
         hoverinfo='x+y',
         mode='lines',
         line=dict(width=0.5, color='rgb(131, 90, 241)'),
-        stackgroup='one', # define stack group
+        fill='tonexty',
+        #stackgroup='one', # define stack group
         name = state_names[i]+' Upper bound', # Style name/legend entry with html tags
         connectgaps=True # override default to connect the gaps
     ))
