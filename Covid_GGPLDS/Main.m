@@ -5,7 +5,8 @@ addAllToPath()
 %chose the dataset
 dataset_name = 'Covid19_newcases'% 'Lorenz','Pedestrian','Stock'
 %chose the task
-task = 'predeiction_historic'% 'interpretation','predeiction_historic', 'prediction_future'
+task = 'prediction_future'% 'interpretation','predeiction_historic', 'prediction_future'
+TypeofEvent =  'death';%'cases'
 % data reconstruction (time consuming due to Kalman smoothing)
 data_reconstruction_flag = 'no'% 'yes','no'
 
@@ -35,7 +36,7 @@ elseif strcmp(dataset_name,'Pedestrian')
         portion = 0.9091;
         Model_hyper_params.alpha1 = 1;
         Model_hyper_params.beta1 = 1.;%1e-2%*ones(K,1);
-    elseif strcmp(task,'predeiction_historic')
+    elseif strcmp(task,'prediction_historic')
         File_name = 'Pedestrian_Historic'
         portion = 0.9091;
         Model_hyper_params.alpha1 = 1;
@@ -85,8 +86,14 @@ elseif strcmp(dataset_name,'FHZ')
     end
     
  elseif strcmp(dataset_name,'Covid19_newcases')
+     
     %load('data/Covid19_newcase.mat')
-    TT = readtable('data/new_death_cases.csv');
+    if strcmp(TypeofEvent , 'death')
+        TT = readtable('data/new_death_cases.csv');
+    elseif strcmp(TypeofEvent , 'cases')
+        TT = readtable('data/new_daily_cases.csv');
+    end
+        
     data =TT(1:end,[1,55:size(TT,2)]);
     data1 =TT{2:end,55:end};
     data6=[];
@@ -108,7 +115,7 @@ elseif strcmp(dataset_name,'FHZ')
         portion = 0.8948;
         Model_hyper_params.alpha1 = 1;
         Model_hyper_params.beta1 = 0.001;%1e-2%*ones(K,1);
-    elseif strcmp(task,'predeiction_historic')
+    elseif strcmp(task,'prediction_historic')
         Folder_name1 = 'Historic_prediction'
         File_name = 'covid19_Historic'
         portion = 0.920;
@@ -139,7 +146,7 @@ rng(run_number);
 if (~ strcmp(dataset_name,'Covid19_newcases'))
     T_S = floor(portion*size(data5,2));
     T_P = size(data5,2)-T_S;
-elseif strcmp(task,'predeiction_historic')
+elseif strcmp(task,'prediction_historic')
     T_S = size(data5,2)-7;
     T_P = 7;
 elseif strcmp(task,'prediction_future')
@@ -607,10 +614,10 @@ else
     end
     initV = cov(S0_col');
 
-    if (strcmp(task,'predeiction_historic')||strcmp(task,'predeiction_future'))
+    if (strcmp(task,'prediction_historic')||strcmp(task,'prediction_future'))
 
         %[XP_temp,abser1,XP_temp2,abser2] = Prediction_Ksteps_count(X,X_w,T_P,X_dim_S,S0_col,S_col,Phi_prime_col,K,W_col,Z_col,D_col,X_W_avg,T,rr_col,task);
-        if strcmp(task,'predeiction_historic')
+        if strcmp(task,'prediction_historic')
             [XP_temp,abser1,XP_temp2,abser2] = Prediction_Ksteps_count(X,X_w,T_P,X_dim_S,S0_col,S_col,Phi_prime_col,K,W_col,Z_col,D_col,X_W_avg,T,rr_col,task);
 
             pred_error1 = abser1(:,1:end,:);
@@ -646,7 +653,7 @@ else
         state_means = [state_means;US_avg];
         US_avg = [US_total_obse,US_avg];
         MyX = cat(1,MyX,US_avg);
-        if (strcmp(task,'predeiction_historic'))
+        if (strcmp(task,'prediction_historic'))
             TrX = cat(1, TrX, sum(data5,1));
             %XP_temp =cat(1,XP_temp,(sum(XP_temp,1)));
         else
@@ -710,7 +717,7 @@ else
             hold on;
 %             plot([1:T_S+T_P], MyX2(i,1:end), 'b');
 %             hold on
-            if strcmp(task,'predeiction_historic')
+            if strcmp(task,'prediction_historic')
                 plot([1:T_S+T_P],TrX(i,1:end),'r')
             else
                 plot([1:T_S],TrX(i,1:end),'r')
@@ -721,10 +728,14 @@ else
             title(sprintf(string(data{i+1,1})));
             legend('Predicted1_','Predicted2_','Real','');
             File_name1 = string(data{i+1,1});
-            saveas(gcf,sprintf('%s%s%s%s%s%s %f %s %d.jpg',Folder_name,'/',Folder_name1,'/',File_name1,'_prediction_',portion,'_K',K))
+            if strcmp(TypeofEvent , 'death')
+                saveas(gcf,sprintf('%s%s%s%s%s%s %f %s %d.jpg',Folder_name,'/',Folder_name1,'/',File_name1,'_death_prediction_',portion,'_K',K));
+            elseif strcmp(TypeofEvent , 'cases')
+                saveas(gcf,sprintf('%s%s%s%s%s%s %f %s %d.jpg',Folder_name,'/',Folder_name1,'/',File_name1,'_daily_cases_prediction_',portion,'_K',K));
+            end
         end
         
-        if strcmp(task,'predeiction_historic')
+        if strcmp(task,'prediction_historic')
             T_means = data;
             T_upperbound = data;
             T_lowerbound = data;
@@ -736,25 +747,38 @@ else
             T_means = data;
             T_upperbound = data;
             T_lowerbound = data;
-            last_day = datetime(data{1,end},'Format', 'MM/dd/yy');
+            last_day = datetime(data{1,end},'Format', 'M/d/yy');
             last_pred_day = daysadd(last_day,7);
-            T_means{1,T_initial+T_S+1:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
-            T_means{2:end,T_initial:T_initial+T_S+T_P}=num2cell(MyX);
-            T_upperbound{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
+            T_means{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
+            T_means{2:end,T_initial:T_initial+T_S+T_P-1}=num2cell(MyX);
+            T_upperbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             T_upperbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_upperBound);
-            T_lowerbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cel;lstr(last_day+1:last_pred_day);
+            T_lowerbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             T_lowerbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_lowerBound);
         end
         
-        filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_mean_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-        %save(filename_workspace)
-        writetable(T_means,filename_table)
-         filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_lowerBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-        %save(filename_workspace)
-        writetable(T_lowerbound,filename_table)
-         filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_upperBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-        %save(filename_workspace)
-        writetable(T_upperbound,filename_table)
+          if strcmp(TypeofEvent , 'death')
+                filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_mean_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+                %save(filename_workspace)
+                writetable(T_means,filename_table)
+                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_lowerBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+                %save(filename_workspace)
+                writetable(T_lowerbound,filename_table)
+                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_upperBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+                %save(filename_workspace)
+                writetable(T_upperbound,filename_table) 
+          elseif strcmp(TypeofEvent , 'cases')
+                filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_mean_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+                %save(filename_workspace)
+                writetable(T_means,filename_table)
+                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_lowerBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+                %save(filename_workspace)
+                writetable(T_lowerbound,filename_table)
+                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_upperBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+                %save(filename_workspace)
+                writetable(T_upperbound,filename_table)
+          end
+        
       
     elseif strcmp(task,'interpretation')
         for t = 1:T_S
@@ -785,8 +809,14 @@ else
     end
 %     csvwrite(filename_csv_global, [Existing_results results_csv']);
 %     csvwrite(filename_csv,results_csv',1,run_number);
-    filename_workspace =  sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-    save(filename_workspace)
+ if strcmp(TypeofEvent , 'death')
+        filename_workspace =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death_','collection_samples','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+        save(filename_workspace)
+  elseif strcmp(TypeofEvent , 'cases')
+        filename_workspace =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases_','collection_samples','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
+        save(filename_workspace)
+  end
+    
     fclose('all');
     %end
 end
