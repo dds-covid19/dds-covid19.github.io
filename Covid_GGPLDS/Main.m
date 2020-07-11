@@ -5,7 +5,7 @@ addAllToPath()
 %chose the dataset
 dataset_name = 'Covid19_newcases'% 'Lorenz','Pedestrian','Stock'
 %chose the task
-task = 'prediction_future'% 'interpretation','predeiction_historic', 'prediction_future'
+task = 'prediction_historic'% 'interpretation','predeiction_historic', 'prediction_future'
 TypeofEvent =  'death';%'cases'
 % data reconstruction (time consuming due to Kalman smoothing)
 data_reconstruction_flag = 'no'% 'yes','no'
@@ -90,6 +90,7 @@ elseif strcmp(dataset_name,'FHZ')
     %load('data/Covid19_newcase.mat')
     if strcmp(TypeofEvent , 'death')
         TT = readtable('data/new_death_cases.csv');
+        %TT2 = readtable('data/new_daily_cases.csv');
     elseif strcmp(TypeofEvent , 'cases')
         TT = readtable('data/new_daily_cases.csv');
     end
