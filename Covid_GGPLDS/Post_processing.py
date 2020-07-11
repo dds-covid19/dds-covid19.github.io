@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime as dt
 
-task = 'future' #'historic''future'
+task = 'historic' #'historic''future'
 event = 'death'#'cases''death'
 if task == 'historic':
     foldername = 'Historic'

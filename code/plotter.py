@@ -22,8 +22,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np 
 
-task = 'future' #'historic''future'
-event = 'cases'#'cases''death'
+task = 'historic' #'historic''future'
+event = 'death'#'cases''death'
 if task == 'historic':
     foldername = 'Historic'
 else:
@@ -86,7 +86,7 @@ if event == 'death':
             mode='lines',
             line=dict(width=0.5, color='rgb(131, 90, 241)'),
             #stackgroup='one',
-            name = state_names[i] + ' Lowe bound', # Style name/legend entry with html tags
+            name = state_names[i] + ' Lower bound', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
@@ -153,7 +153,7 @@ else:
             mode='lines',
             line=dict(width=0.5, color='rgb(131, 90, 241)'),
             #stackgroup='one',
-            name = state_names[i] + ' Lowe bound', # Style name/legend entry with html tags
+            name = state_names[i] + ' Lower bound', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
