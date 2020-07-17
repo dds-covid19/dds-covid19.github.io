@@ -1,57 +1,54 @@
 clc
 clear; close all; fclose all;
 path(path,'.\sample_toolbox\') ;
-%%  load  data
-dataname = 'covid2019_death_cases';
+%  load  data
+dataname = 'Covid19_newcases'% 
 %chose the task
-task = 'prediction_future';% 'interpretation','prediction_historic', 'prediction_future'
-T_initial = 2;            % 3/15/2020
+TypeofEvent = 'cases' ; %'cases' , 'death'
+task = 'prediction_historic';       % 'prediction_future', 'prediction_historic'
+
+
+
+%chose the task
 Folder_name = 'results';
 
 
 switch dataname                               
-	case   'covid2019_death_cases'
-     
+	case   'Covid19_newcases'
+            if strcmp(TypeofEvent , 'death')
+                TT = readtable('data/new_death_cases.csv');
+            elseif strcmp(TypeofEvent , 'cases')
 
-    
+                TT = readtable('data/new_daily_cases.csv');
 
-    TT = readtable('data/new_death_cases.csv');
-
-
+            end
+   
+    data =TT(1:end,[1,55:size(TT,2)]);
     data1 =TT{2:end,55:end};
     data6=[];
     data6=[data6; cellfun(@str2num, data1(:,1:end))];
     data_all=data6;
-
-
-    
-    data =TT(1:end,[1,55:size(TT,2)]);
     data{2:end,2:end}=num2cell(data6);
     data(end+1,1)=cellstr('US');
     data{end,2:end}=num2cell(sum(data6,1));
+    V = size(data_all,1);  
+    T_initial = 2;            % 3/15/2020
+
+end 
 
 
-    V = size(data_all,1);
     
-    
-end	
-
-
-if strcmp(task,'interpretation')
-    File_name = 'Covid_new_case_model_K_30_K_prime16_interpretation';
-elseif strcmp(task,'prediction_historic')
+	
+%%  processing the data
+if strcmp(task,'prediction_historic')
     Folder_name1 = 'Historic_prediction';
-    File_name = 'covid19_Historic';
     T         = size(data_all,2)-7;
-    T_test    =    7;
-    
+    T_test    =    7;  
 elseif strcmp(task,'prediction_future')
     Folder_name1 = 'Future_prediction';
-    File_name    = 'covid19_future';
     T          = size(data_all,2);
     T_test       = 7;
 end
-
 
 X_test=[];    
 for i = 1:size(data_all,2)
@@ -64,19 +61,19 @@ end
 
 TRdata = X_train;
 TEdata = X_test;
-
+TrX = cat(2, TRdata, TEdata);
 %%  Setting 
-K =   [15];
+K =   [20];
 L = length(K);
 Setting.num_trial     = 1;
-Setting.Burnin        =   150;
-Setting.Collection    =   300;
-Setting.Stationary    =   1;
-Setting.Sample_interval       =   60;
+Setting.Burnin        =   1500;
+Setting.Collection    =   2500;
+Setting.Stationary    =   0;
+Setting.Sample_interval       =   50;
 Setting.step          = 10;
 Setting.Pred_timestep = T_test;
 Setting.pred_count     = 100;
-%%  save the figure
+%%  save the figure and the predicted results
 if  L==1
     save_file = ['./results/', Folder_name1,'/','layer',num2str(L),'/','K1_',num2str(K(1)),'/'];
 elseif L==2 
@@ -84,23 +81,12 @@ elseif L==2
 else
     save_file = ['./results/', Folder_name1,'/','layer',num2str(L),'/','K1_',num2str(K(1)),'_K2_',num2str(K(2)),'_K3_',num2str(K(3)),'/'];
 end
+
 if ~ exist(save_file)
 mkdir(save_file);
 end
-%%  evalution
-evalute = 1;
-evalute_name_all = {'MARE'};
-evalute_name  = cell2mat(evalute_name_all(evalute));
 
-%%  save for evaluate
-X_pred = cell(Setting.num_trial,1);
-estimate=zeros(Setting.num_trial,V,T_test); %  将num_chain*Collection  多次平均后得到sample
-
-estimate_error = zeros(Setting.num_trial,V,T_test);  %将估计的预测样本减去真实测试样本
-estimate_error_meandimension =zeros(Setting.num_trial,T_test); % 估计误差维度平均
-rec_data= cell(Setting.num_trial,1); %save the reconstructions 
-
-
+%%   our model
 for trial =1:Setting.num_trial
        kk=1;
 
@@ -258,7 +244,7 @@ for trial =1:Setting.num_trial
                     
                 end
             end
-            %% sample Theta  对
+            %% sample Theta 
         for l=L:-1:1
            
            if l==L
@@ -373,57 +359,76 @@ for trial =1:Setting.num_trial
         %%  
         if strcmp(task,'prediction_historic')
             
-            [XP_temp,abser,X_recon] = Predict_multisteps(Para_sample,Theta_sample,T,T_test,V,L,Setting.pred_count,delta_sample,TEdata,task);   
+          [XP_temp,abser,X_recon] = Predict_multisteps(Para_sample,Theta_sample,T,T_test,V,L,Setting.pred_count,delta_sample,TEdata,task);   
+         % [XP_temp,abser,X_recon] = Predict_multisteps_delta(Para_sample,Theta_sample,T,T_test,V,L,100,delta_sample,TEdata,TRdata,task,Setting.Stationary,Supara.epilson0);   
             
             pred_error1 = abser(:,1:end,:);
             M_pred = mean(abs(TEdata(:,1:end)));
             mean_error1 = mean(mean(pred_error1,3),1);
             temp = permute(pred_error1,[1 3 2]);
             temp = reshape(temp,[],size(pred_error1,2),1);
-            std_error1 = sqrt(var(temp));
-                                                            
-        else
-            
+            std_error1 = sqrt(var(temp));                                                            
+        else            
             TEdata=[];            
             [XP_temp,abser,X_recon] = Predict_multisteps(Para_sample,Theta_sample,T,T_test,V,L,Setting.pred_count,delta_sample,TEdata,task);
 
         end
         % reconstruction
-        X_recon_avg = mean(X_recon,3);
-        X_predict_avg = squeeze(mean(mean(XP_temp,4),2));
-        MyX = cat(2, X_recon_avg, (X_predict_avg));
-        TrX = cat(2, TRdata, TEdata);
-        state_means = squeeze(mean(squeeze(mean(XP_temp,2)),3));
+
+%         X_reconp_avg2=0;
+%         for ii=1:Setting.pred_count
+%             for jj=1:size(Para_sample,2)
+%                 X_reconp_avg2=X_reconp_avg2+ squeeze(XP_temp(:,ii,:,jj))/Setting.pred_count/size(Para_sample,2);
+%             end
+%         end
+% theta_tmp=Theta{1}(:,end)  ;    
+% for t=1:7
+%     a(:,t)= randg((Para.Pi{1})^(t)*theta_tmp);
+%     b(:,t)= poissrnd( Para.Phi{1}* a(:,t));
+%     c(t)= poissrnd(squeeze(sum( Para.Phi{1}* a(:,t),1)));    
+% end
+% A=(Para.Pi{1})^(7);
+% B1 = A*theta_tmp;
+% B2 = (Para.Pi{1})^(18)*theta_tmp;
+% sum(Para.Phi{1}*B2,1)
+% A1=squeeze(XP_temp(:,1,:,:));
+% A2=mean(A1,3);
+% A3=sum(A2,1);
+% 
+% B1=squeeze(XP_temp(:,2,:,:));
+% B2=mean(B1,3);
+% B3=sum(B2,1);
+% 
+
+        X_recon_avg = mean(X_recon,3);      
+        X_reconp_avg = squeeze(mean(mean(XP_temp,4),2));
+        MyX = cat(2, X_recon_avg, (X_reconp_avg));
         
-        US_total_obse = sum(data_all(:,1:T),1);
 
-        US_total_pred = (sum(XP_temp,1));
-
-        XP_temp =cat(1,XP_temp,US_total_pred);
-
-        US_total_pred = permute(squeeze(US_total_pred),[1 3 2]);
-
-        US_avg = squeeze(mean(squeeze(mean(US_total_pred,2)),1));
-
-        state_means = [state_means;US_avg];
-
-        US_avg = [US_total_obse,US_avg];
-
-        MyX = cat(1,MyX,US_avg);
+        XP_all =cat(1,XP_temp,sum(XP_temp,1));
         
+        US_total_obse = sum(data_all(:,1:T),1);  
+        US_avg = [US_total_obse,sum(X_reconp_avg,1)];
+        MyX_all = cat(1,MyX,US_avg);
+        
+
+                
+                
          if (strcmp(task,'prediction_historic'))
             TrX = cat(1, TrX, sum(data_all,1));
             %XP_temp =cat(1,XP_temp,(sum(XP_temp,1)));
         else
             TrX = cat(1, TrX, sum(data_all,1));
          end
-        
          
-         
-         for i = 1:size(MyX,1)
-            figure()
-            temp11 = permute(squeeze(XP_temp(i,:,:,:)),[1 3 2]);
+         close all
+         for i = 1:size(MyX_all,1)
+            figure(i)
+            temp11= permute(squeeze(XP_all(i,:,:,:)),[1 3 2]);
             temp11 = reshape(temp11,[],size(temp11,3),1);
+
+
+                                    
             xxx=[T+1:T+T_test];
             shadedErrorBar(xxx,temp11,{@mean,@(xxx) CI_values(xxx)},'lineProps',{'b','markerfacecolor','r'})
             temp22 = CI_values(temp11);
@@ -431,7 +436,7 @@ for trial =1:Setting.num_trial
             state_lowerBound(i,:)= temp22(2,:);
 
             hold on;
-            plot([1:T+T_test], MyX(i,1:end), 'b');
+            plot([1:T+T_test], MyX_all(i,1:end), 'b');
 
             if strcmp(task,'prediction_historic')
                 plot([1:T+T_test],TrX(i,1:end),'r')
@@ -439,13 +444,20 @@ for trial =1:Setting.num_trial
                 plot([1:T],TrX(i,1:end),'r')
             end
             hold on 
-            max_y = max(max(TrX(i,:)),max(MyX(i,:)));
+            max_y = max(max(TrX(i,:)),max(MyX_all(i,:)));
             line([T,T],[0,max_y ] ,'Color','black','LineStyle','--')
             hold off
             title(sprintf(string(data{i+1,1})));
             legend('Predicted1','Predicted2','Real');
-            fn  =  [save_file  data{i+1,1}{1} '_layer' num2str(L) '_prediction' '.jpg'];
-            saveas(gcf,fn);
+            
+            if strcmp(TypeofEvent , 'death')
+                fn  =  [save_file  data{i+1,1}{1} '_death_prediction_' '_layer' num2str(L)  '.jpg'];
+                saveas(gcf,fn);
+            elseif strcmp(TypeofEvent , 'cases')
+                fn  =  [save_file  data{i+1,1}{1} '_daily_cases_prediction_' '_layer' num2str(L)  '.jpg'];
+                saveas(gcf,fn);
+            end
+            
          end
 
         
@@ -456,7 +468,7 @@ for trial =1:Setting.num_trial
             T_upperbound = data;
             T_lowerbound = data;
 
-            T_means{2:end,T_initial:T_initial+T+T_test-1}=num2cell(MyX);
+            T_means{2:end,T_initial:T_initial+T+T_test-1}=num2cell(MyX_all);
 
             T_lowerbound{2:end,T_initial+T:T_initial+T+T_test-1}=num2cell(state_lowerBound);
 
@@ -469,7 +481,7 @@ for trial =1:Setting.num_trial
             last_day = datetime(data{1,end},'Format', 'MM/dd/yy');
             last_pred_day = daysadd(last_day,7);
             T_means{1,T_initial+T:T_initial+T+T_test-1} = cellstr(last_day+1:last_pred_day);
-            T_means{2:end,T_initial:T_initial+T+T_test-1}=num2cell(MyX);
+            T_means{2:end,T_initial:T_initial+T+T_test-1}=num2cell(MyX_all);
 
             T_upperbound{1,T_initial+T:T_initial+T+T_test-1} = cellstr(last_day+1:last_pred_day);
                         
@@ -481,16 +493,32 @@ for trial =1:Setting.num_trial
 
         end       
          
-        filename_table = [save_file 'death','_mean','.csv']
-        writetable(T_means,filename_table)
+
         
-        filename_table = [save_file 'death','_lowerBound','.csv']         
-        writetable(T_lowerbound,filename_table)
-        filename_table = [save_file 'death','_upperBound','.csv']         
-        writetable(T_upperbound,filename_table)
+          if strcmp(TypeofEvent , 'death')
+              
+                filename_table = [save_file 'death','_mean_','.csv']
+                writetable(T_means,filename_table)
+                filename_table = [save_file 'death','_lowerBound_','.csv']         
+                writetable(T_lowerbound,filename_table)
+                filename_table = [save_file 'death','_upperBound_','.csv']         
+                writetable(T_upperbound,filename_table)
                 
+          elseif strcmp(TypeofEvent , 'cases')
+              
+                filename_table = [save_file 'daily_cases','_mean_','.csv']
+                writetable(T_means,filename_table)
+                filename_table = [save_file 'daily_cases','_lowerBound_','.csv']         
+                writetable(T_lowerbound,filename_table)
+                filename_table = [save_file 'daily_cases','_upperBound_','.csv']         
+                writetable(T_upperbound,filename_table)
+                
+          end
+          
+          
+          
         
-        name_save = [dataname,'_','_trial',num2str(trial),evalute_name,'_S',num2str(Setting.Stationary),'.mat'];
+        name_save = [dataname,'_','_trial',num2str(trial),TypeofEvent,'_S',num2str(Setting.Stationary),'.mat'];
         save([save_file,name_save])                
 end
 
