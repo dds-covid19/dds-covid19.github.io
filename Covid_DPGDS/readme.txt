@@ -5,3 +5,5 @@
    save 'time_series_covid19_deaths_US.csv' and 'time_series_covid19_confirmed_US.csv'  into the './data' file
 
 2 train the model with 'run_matlab.py'
+
+3 process the results from the dpgds

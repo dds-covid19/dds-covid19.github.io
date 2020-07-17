@@ -5,8 +5,7 @@ function [XP_temp,abser,Rec_data] = Predict_multisteps(Para_sample,Theta_sample,
 XP_temp    =   zeros(V,pred_count,T_test,size(Para_sample,2));
 Rec_data   =   zeros(V,   T,   size(Para_sample,2));
 abser     =   zeros(V,T_test,size(Para_sample,2));
-Theta_pred = cell(L,1);           
-Theta_last = cell(L,1);  
+
 
     for num_sample = 1:size(Para_sample,2)
         
@@ -18,18 +17,15 @@ Theta_last = cell(L,1);
         Lambda   =  bsxfun(@times,delta_tmp{1}(end)', Phi_tmp{1}* Theta_tmp{1});
         Rec_data(:,:,num_sample) = poissrnd(Lambda);  
             
-        for cc = 1: pred_count  
+        for cc = 1: pred_count 
+            Theta_pred = cell(L,1);           
+            Theta_last = cell(L,1);  
+               % obtain the latent state at last time step for the observed data
+               for l=1:L
+                 Theta_last{l} = Theta_tmp{l}(:,end);                                            
+               end
+                         
                 for tstep =1:T_test
-                        % obtain the latent state at last time step for the observed data
-                         for l=1:L
-                             
-                            if tstep == 1
-                               Theta_last{l} = Theta_tmp{l}(:,end);
-                            else
-                               Theta_last{l} = Theta_pred{l};
-                            end
-                            
-                         end
 
                     for l = L:-1:1
                         if l==L
@@ -40,6 +36,8 @@ Theta_last = cell(L,1);
                     end
                     
                     XP_temp(:,cc,tstep,num_sample) = poissrnd(bsxfun(@times,delta_tmp{1}(end)', Phi_tmp{1} * Theta_pred{1}));%²ÉÑù
+                    Theta_last = Theta_pred;
+
 
                 end
 

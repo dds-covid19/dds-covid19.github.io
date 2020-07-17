@@ -22,15 +22,15 @@ abser     =   zeros(V,T_test,size(Para_sample,2));
                              
                     if tstep == 1
                        for cc = 1:pred_count
-                           Theta_pred(:,cc) = randg(Pi_tmp{1}*Theta_tmp{1}(:,end));
-                           XP_temp(:,cc,tstep,num_sample) = poissrnd(bsxfun(@times,delta_tmp{1}(end)', Phi_tmp{1} *Theta_pred(:,cc)));%采样
+                           Theta_pred(:,cc) = (Pi_tmp{1}*Theta_tmp{1}(:,end));
+                           XP_temp(:,cc,tstep,num_sample) = (bsxfun(@times,delta_tmp{1}(end)', Phi_tmp{1} *Theta_pred(:,cc)));%采样
                        end
 
                     else
                         
                         for cc = 1:pred_count
-                           Theta_pred(:,cc) = randg(Pi_tmp{1}*Theta_last(:,cc));
-                           XP_temp(:,cc,tstep,num_sample) = poissrnd(bsxfun(@times,delta_tmp{1}(end)', Phi_tmp{1} *Theta_pred(:,cc)));%采样
+                           Theta_pred(:,cc) = (Pi_tmp{1}*Theta_last(:,cc));
+                           XP_temp(:,cc,tstep,num_sample) = (bsxfun(@times,delta_tmp{1}(end)', Phi_tmp{1} *Theta_pred(:,cc)));%采样
                         end  
                        
                     end
