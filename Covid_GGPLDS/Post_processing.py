@@ -10,7 +10,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime as dt
 
-task = 'historic' #'historic''future'
+task = 'future' #'historic''future'
 event = 'death'#'cases''death'
 if task == 'historic':
     foldername = 'Historic'
@@ -57,6 +57,8 @@ if event == 'death':
     results_death= pd.merge(results_death, death_higher_col, how='outer', on=['Province_State', 'date'])
     #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
     results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_.csv', index = True, header=True)
+    
+    
 
 
     
