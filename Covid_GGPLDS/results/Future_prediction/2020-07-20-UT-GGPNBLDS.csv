@@ -1,0 +1,209 @@
+model,forecast_date,target,location_name,target_week_end_date,point,quantile_0.025,quantile_0.975
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Alabama,2020-07-25,1402,1322,1563
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Alaska,2020-07-25,21,18,28
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Arizona,2020-07-25,3186,2897,3794
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Arkansas,2020-07-25,395,372,432
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,California,2020-07-25,8160,7904,8633
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Colorado,2020-07-25,1766,1755,1786
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Connecticut,2020-07-25,4409,4400,4425
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Delaware,2020-07-25,526,523,533
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,District of Columbia,2020-07-25,584,579,592
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Florida,2020-07-25,5553,5193,6168
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Georgia,2020-07-25,3274,3205,3410
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Hawaii,2020-07-25,28,24,38
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Idaho,2020-07-25,133,121,163
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Illinois,2020-07-25,7577,7520,7692
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Indiana,2020-07-25,2864,2838,2908
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Iowa,2020-07-25,810,799,828
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Kansas,2020-07-25,324,314,341
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Kentucky,2020-07-25,707,681,756
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Louisiana,2020-07-25,3650,3589,3756
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Maine,2020-07-25,122,117,130
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Maryland,2020-07-25,3418,3395,3452
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Massachusetts,2020-07-25,8509,8466,8575
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Michigan,2020-07-25,6409,6380,6460
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Minnesota,2020-07-25,1601,1589,1620
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Mississippi,2020-07-25,1442,1395,1527
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Missouri,2020-07-25,1170,1149,1202
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Montana,2020-07-25,47,38,65
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Nebraska,2020-07-25,312,302,335
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Nevada,2020-07-25,699,667,748
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,New Hampshire,2020-07-25,404,399,416
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,New Jersey,2020-07-25,15872,15763,16133
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,New Mexico,2020-07-25,588,577,605
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,New York,2020-07-25,32609,32541,32735
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,North Carolina,2020-07-25,1739,1687,1834
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,North Dakota,2020-07-25,96,92,103
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Ohio,2020-07-25,3260,3208,3360
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Oklahoma,2020-07-25,476,457,515
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Oregon,2020-07-25,286,269,312
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Pennsylvania,2020-07-25,7098,7044,7225
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Rhode Island,2020-07-25,1001,992,1015
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,South Carolina,2020-07-25,1327,1232,1475
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,South Dakota,2020-07-25,128,119,152
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Tennessee,2020-07-25,956,888,1084
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Texas,2020-07-25,4621,4266,5228
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Utah,2020-07-25,272,254,302
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Vermont,2020-07-25,57,56,59
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Virginia,2020-07-25,2086,2053,2141
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Washington,2020-07-25,1501,1471,1545
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,West Virginia,2020-07-25,102,100,108
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Wisconsin,2020-07-25,860,848,885
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Wyoming,2020-07-25,27,25,32
+UT-GGPNBLDS,2020-07-20,1 wk ahead cum death,Nation,2020-07-25,144463,142574,147584
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Alabama,2020-08-01,1557,1392,1897
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Alaska,2020-08-01,28,19,54
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Arizona,2020-08-01,3850,3168,5118
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Arkansas,2020-08-01,449,401,529
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,California,2020-08-01,8707,8155,9760
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Colorado,2020-08-01,1780,1759,1816
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Connecticut,2020-08-01,4422,4404,4452
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Delaware,2020-08-01,529,524,542
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,District of Columbia,2020-08-01,591,581,604
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Florida,2020-08-01,6420,5524,8054
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Georgia,2020-08-01,3383,3247,3644
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Hawaii,2020-08-01,37,25,80
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Idaho,2020-08-01,164,128,269
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Illinois,2020-08-01,7668,7556,7908
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Indiana,2020-08-01,2909,2860,2987
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Iowa,2020-08-01,828,808,860
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Kansas,2020-08-01,346,324,387
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Kentucky,2020-08-01,758,705,873
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Louisiana,2020-08-01,3788,3653,4008
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Maine,2020-08-01,128,119,150
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Maryland,2020-08-01,3459,3415,3519
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Massachusetts,2020-08-01,8589,8500,8727
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Michigan,2020-08-01,6458,6397,6573
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Minnesota,2020-08-01,1621,1598,1655
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Mississippi,2020-08-01,1551,1456,1712
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Missouri,2020-08-01,1211,1171,1270
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Montana,2020-08-01,71,41,158
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Nebraska,2020-08-01,326,306,368
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Nevada,2020-08-01,776,703,881
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,New Hampshire,2020-08-01,411,401,432
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,New Jersey,2020-08-01,16052,15832,16554
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,New Mexico,2020-08-01,609,587,640
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,New York,2020-08-01,32732,32580,33066
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,North Carolina,2020-08-01,1844,1743,2017
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,North Dakota,2020-08-01,102,93,119
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Ohio,2020-08-01,3357,3255,3551
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Oklahoma,2020-08-01,513,470,601
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Oregon,2020-08-01,325,286,391
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Pennsylvania,2020-08-01,7179,7073,7413
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Rhode Island,2020-08-01,1011,997,1034
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,South Carolina,2020-08-01,1595,1357,2021
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,South Dakota,2020-08-01,145,122,199
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Tennessee,2020-08-01,1123,971,1477
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Texas,2020-08-01,5578,4632,7266
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Utah,2020-08-01,314,271,385
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Vermont,2020-08-01,58,56,64
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Virginia,2020-08-01,2153,2089,2251
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Washington,2020-08-01,1568,1505,1652
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,West Virginia,2020-08-01,105,100,117
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Wisconsin,2020-08-01,879,854,921
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Wyoming,2020-08-01,30,25,41
+UT-GGPNBLDS,2020-07-20,2 wk ahead cum death,Nation,2020-08-01,150086,145711,156893
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Alabama,2020-08-08,1741,1460,2305
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Alaska,2020-08-08,43,20,136
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Arizona,2020-08-08,4766,3436,7568
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Arkansas,2020-08-08,514,433,663
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,California,2020-08-08,9285,8357,11279
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Colorado,2020-08-08,1792,1761,1849
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Connecticut,2020-08-08,4433,4406,4485
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Delaware,2020-08-08,532,524,550
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,District of Columbia,2020-08-08,597,583,616
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Florida,2020-08-08,7594,5830,11627
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Georgia,2020-08-08,3487,3280,3884
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Hawaii,2020-08-08,65,26,291
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Idaho,2020-08-08,231,135,600
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Illinois,2020-08-08,7748,7575,8143
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Indiana,2020-08-08,2949,2874,3067
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Iowa,2020-08-08,845,815,890
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Kansas,2020-08-08,373,335,463
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Kentucky,2020-08-08,819,728,1031
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Louisiana,2020-08-08,3940,3713,4322
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Maine,2020-08-08,138,120,184
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Maryland,2020-08-08,3494,3429,3588
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Massachusetts,2020-08-08,8658,8521,8899
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Michigan,2020-08-08,6506,6407,6714
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Minnesota,2020-08-08,1638,1603,1687
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Mississippi,2020-08-08,1669,1517,1942
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Missouri,2020-08-08,1252,1188,1345
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Montana,2020-08-08,145,44,652
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Nebraska,2020-08-08,341,310,408
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Nevada,2020-08-08,874,743,1074
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,New Hampshire,2020-08-08,417,402,446
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,New Jersey,2020-08-08,16217,15873,17021
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,New Mexico,2020-08-08,628,596,678
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,New York,2020-08-08,32857,32598,33520
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,North Carolina,2020-08-08,1954,1799,2240
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,North Dakota,2020-08-08,108,95,145
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Ohio,2020-08-08,3450,3291,3778
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Oklahoma,2020-08-08,562,483,734
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Oregon,2020-08-08,381,305,549
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Pennsylvania,2020-08-08,7252,7093,7622
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Rhode Island,2020-08-08,1019,999,1055
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,South Carolina,2020-08-08,1988,1480,3237
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,South Dakota,2020-08-08,168,126,283
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Tennessee,2020-08-08,1345,1055,2137
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Texas,2020-08-08,6977,4991,11333
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Utah,2020-08-08,370,289,519
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Vermont,2020-08-08,60,56,73
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Virginia,2020-08-08,2217,2118,2368
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Washington,2020-08-08,1640,1534,1778
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,West Virginia,2020-08-08,109,101,128
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Wisconsin,2020-08-08,897,859,959
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Wyoming,2020-08-08,34,25,61
+UT-GGPNBLDS,2020-07-20,3 wk ahead cum death,Nation,2020-08-08,157120,148653,171760
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Alabama,2020-08-15,1965,1530,2861
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Alaska,2020-08-15,87,21,448
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Arizona,2020-08-15,6221,3699,13527
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Arkansas,2020-08-15,599,463,900
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,California,2020-08-15,9935,8503,13518
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Colorado,2020-08-15,1804,1762,1885
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Connecticut,2020-08-15,4443,4407,4526
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Delaware,2020-08-15,535,524,562
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,District of Columbia,2020-08-15,602,584,630
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Florida,2020-08-15,9392,6100,18938
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Georgia,2020-08-15,3588,3306,4161
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Hawaii,2020-08-15,372,26,2041
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Idaho,2020-08-15,547,141,1998
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Illinois,2020-08-15,7822,7584,8433
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Indiana,2020-08-15,2985,2882,3157
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Iowa,2020-08-15,860,819,918
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Kansas,2020-08-15,413,348,634
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Kentucky,2020-08-15,895,751,1219
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Louisiana,2020-08-15,4110,3759,4726
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Maine,2020-08-15,151,121,253
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Maryland,2020-08-15,3526,3437,3664
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Massachusetts,2020-08-15,8723,8532,9109
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Michigan,2020-08-15,6557,6413,6890
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Minnesota,2020-08-15,1651,1606,1717
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Mississippi,2020-08-15,1802,1577,2248
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Missouri,2020-08-15,1295,1201,1450
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Montana,2020-08-15,596,47,4305
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Nebraska,2020-08-15,358,312,455
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Nevada,2020-08-15,1003,782,1367
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,New Hampshire,2020-08-15,423,403,461
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,New Jersey,2020-08-15,16377,15899,17600
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,New Mexico,2020-08-15,647,602,716
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,New York,2020-08-15,32992,32608,34193
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,North Carolina,2020-08-15,2073,1847,2493
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,North Dakota,2020-08-15,118,96,190
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Ohio,2020-08-15,3541,3317,4025
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Oklahoma,2020-08-15,629,495,946
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Oregon,2020-08-15,471,324,962
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Pennsylvania,2020-08-15,7321,7103,7844
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Rhode Island,2020-08-15,1027,1000,1075
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,South Carolina,2020-08-15,2751,1606,7099
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,South Dakota,2020-08-15,203,130,444
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Tennessee,2020-08-15,1664,1147,3337
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Texas,2020-08-15,9386,5300,21962
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Utah,2020-08-15,449,307,744
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Vermont,2020-08-15,63,56,93
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Virginia,2020-08-15,2278,2137,2482
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Washington,2020-08-15,1717,1558,1920
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,West Virginia,2020-08-15,114,102,144
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Wisconsin,2020-08-15,914,861,997
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Wyoming,2020-08-15,42,26,106
+UT-GGPNBLDS,2020-07-20,4 wk ahead cum death,Nation,2020-08-15,168038,151478,206314
