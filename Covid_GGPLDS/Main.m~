@@ -770,7 +770,7 @@ else
             temp22 = CI_values(temp11);
             temp55 = permute(squeeze(XP_temp_weekly(i,:,:,:)),[1 3 2]);
             temp55 = reshape(temp55,[],size(temp55,3),1);
-            temp66 = CI_values_all(temp55);
+            temp66 = CI_values_all(temp55)
             state_upperBound(i,:)= temp22(1,:);
             state_lowerBound(i,:)= temp22(2,:);
             
@@ -829,7 +829,7 @@ else
             T_upperbound = data;
             T_lowerbound = data;
             
-            
+            T_cum = data;
             T_weekly = data;
             
             
@@ -842,30 +842,26 @@ else
             T_lowerbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             T_lowerbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_lowerBound);
             
-            
-            if strcmp(TypeofEvent , 'death')
-                T_cum = data;
-                last_day = datetime(data{1,end},'Format', 'M/d/yy');
-                last_pred_day = daysadd(last_day,30);
-                T_cum{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
-                q_list =[0.01, 0.025, 0.05, 0.10, 0.15, 0.2, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 0.975, 0.99 ];
-                for i =1:(length(q_list)+1)
+            last_day = datetime(data{1,end},'Format', 'M/d/yy');
+            last_pred_day = daysadd(last_day,30);
+            T_cum{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
+            q_list =[0.01, 0.025, 0.05, 0.10, 0.15, 0.2, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 0.975, 0.99 ];
+            for i =1:(length(q_list)+1)
+                
+                if i ==1
+                    temp = data;
+                    temp.Var2= cat(1,cellstr('type'),cellstr(repmat('point',52,1)));
+                    T_cum = [temp(:,1),temp(:,end),temp(:,2:end-1)];
+                    T_cum{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
+                    T_cum{2:end,T_initial+1:T_initial+T_S+T_P}=num2cell(MyX_cum);
+                else
+                    temp = data;
+                    temp.Var2= cat(1,cellstr('type'),cellstr(repmat(num2str(q_list(i-1)),52,1)));
+                    temp = [temp(:,1),temp(:,end),temp(:,2:end-1)];
+                    temp{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
+                    temp{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(squeeze(state_Bound_cum(:,i-1,:)));
+                    T_cum = vertcat(T_cum,temp(2:end,1:end));
 
-                    if i ==1
-                        temp = data;
-                        temp.Var2= cat(1,cellstr('type'),cellstr(repmat('point',52,1)));
-                        T_cum = [temp(:,1),temp(:,end),temp(:,2:end-1)];
-                        T_cum{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
-                        T_cum{2:end,T_initial+1:T_initial+T_S+T_P}=num2cell(MyX_cum);
-                    else
-                        temp = data;
-                        temp.Var2= cat(1,cellstr('type'),cellstr(repmat(num2str(q_list(i-1)),52,1)));
-                        temp = [temp(:,1),temp(:,end),temp(:,2:end-1)];
-                        temp{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
-                        temp{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(squeeze(state_Bound_cum(:,i-1,:)));
-                        T_cum = vertcat(T_cum,temp(2:end,1:end));
-
-                    end
                 end
             end
             
@@ -927,10 +923,6 @@ else
                  filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_upperBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
                 %save(filename_workspace)
                 writetable(T_upperbound,filename_table)
-                
-                filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_weekly','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-                %save(filename_workspace)
-                writetable(T_weekly,filename_table)
           end
         
       
