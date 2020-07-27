@@ -166,6 +166,13 @@ function Model_interpretation(m_ikj,r,theta,psi,K_prime,X_orig_avg1,S0,S,K,W,Z,D
                     subplot(5,4,4*(i-1)+cc)
                     plot(temptemp(i,:,cc))
                     xlim([0 600])
+                    if cc ==1 
+                        ylim([-35 50])
+                    elseif cc==2
+                        ylim([-30 15])
+                    elseif cc==3
+                        ylim([-10 20])
+                    end
                     if i==1
                         title(['Community ',num2str(cc)],'FontSize', 9)
                     end
