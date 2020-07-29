@@ -4,7 +4,7 @@
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<meta name="description" content="COVID-19 predictions via discrete dynamical systems" />
 	<meta name="keywords" content="Discrete dynamical systems, COVID-19" />
-	<link rel="stylesheet" type="text/css" href="Mingyuan.css" title="Basic Profile" media="all" />
+	<link rel="stylesheet" type="text/css" href="src/Mingyuan.css" title="Basic Profile" media="all" />
 	<title>DDS-COVID-19</title>
 </head>
 
@@ -14,13 +14,15 @@
 
 
 	<div id="sidebar">
-		<h1><a style="text-decoration: none" href="index.html">Discrete Dynamical Systems for COVID-19 Prediction</a></h1>
+		<h1><a style="text-decoration: none" href="index.html">Discrete Dynamical Systems (DDS) for COVID-19 Forecast</a></h1>
 		<!-- <p class="slogan">everyone has a story to tell</p> -->
-
+		
 		<ul>
 			<!--<li><a href="#">Page one</a><br />The front page...</li>-->
 			<li><a href="Model.html">Statistical Models</a></li>
-			<li><a href="Team.html">Team Members</a></li>
+			<li><a href="Team.html">DDS Team Members</a></li>
+			<li><a href="https://github.com/reichlab/covid19-forecast-hub/tree/master/data-processed/DDS-NBDS">Forecast Results</a></li>
+			<li><a href="https://viz.covid19forecasthub.org/">Forecast Comparison</a></li>
 			<li><a href="https://github.com/dds-covid19/dds-covid19.github.io">View The Project On <strong>GitHub</strong></a></li>
 			<p>
 			<font size="2.5">
@@ -30,37 +32,34 @@
 			</font>
 		</ul>
 	</div>
-
-
-
+	
+	
+	
 
 	<div id="content">
 		<!--<h2>What Starts Here Changes The World!</h2>-->
 		<p>
 		<p>
 		<br>
-
-		<p>This page provides the prediction of daily COVID-19 deaths and cases in the US using discrete dynamical systems.
-
-		<br>
-		<br>This is a project at its testing phase. We are working hard towards an official release. 
-
-		<br>
-		<br>The predictions are purely data driven.
-
-
-
-		<h1><a href="index.html">Prediction of Daily COVID-19 Deaths</a>&nbsp&nbsp&nbsp&nbsp    <a href="case_prediction.html">Prediction of Daily COVID-19 Cases</a></h1>
-
-		<h1><a href="index.html">Verification of Prediction of Deaths</a>&nbsp&nbsp&nbsp&nbsp    <a href="case_prediction.html">Verification of Prediction of Cases</a></h1>
-
-
-		<embed type="text/html" src="images/GGPLDS/fig_Historic_death.html" width="1000" height="500">
-
+		
+		<p id="method"></p>		
+		<script src="src/method.js"></script>
+		
+		
+		
+		<h1><a href="index.html">Forecast of Daily COVID-19 Deaths</a>&nbsp&nbsp&nbsp&nbsp    <a href="case_prediction.html">Forecast of Daily COVID-19 Cases</a></h1>
+		
+		<h1><a href="death_verify.html">Verification of Forecast of Deaths</a>&nbsp&nbsp&nbsp&nbsp    <a href="case_verify.html">Verification of Forecast of Cases</a></h1>
+		
+		<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="images/GGPLDS/fig_Historic_death.html" height="500" width="1200"></iframe>
+		
+		
+		
 		<!--
 		<h1><a href="images/GGPLDS/fig_Future_daily_cases.html">Prediction of Daily COVID-19 Cases</a></h1>
 		
 		<embed type="text/html" src="images/GGPLDS/fig_Future_daily_cases.html" width="1000" height="500">
+
 		
 		<form action="">
 		 
@@ -87,7 +86,7 @@
 		</form>
 				
 -->
-
+		
 		<p class="credits">&copy; June 2020, Mingyuan Zhou<br />
 		</ul>
 	</div>
