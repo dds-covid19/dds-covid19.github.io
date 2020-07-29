@@ -47,11 +47,13 @@ if event == 'death':
         temp = death_.loc[death_['Province_State'] == state_names[i]]
         x_prediction = temp['date'].iloc[-7:]
         y_prediction = temp['number_of_deaths'].iloc[-7:]
+       
         y_lower = temp['number_of_deaths_lower'].iloc[-7:]
         y_higher = temp['number_of_deaths_higher'].iloc[-7:]
        
         x_fit = temp['date'].iloc[52:-7]
         y_fit = temp['number_of_deaths'].iloc[52:-7]
+       
         
         x_real = temp['date']
         y_real = temp['real_number_of_deaths']
@@ -64,7 +66,7 @@ if event == 'death':
         name= state_names[i]+' Real data',
     ))
     
-        if i<51:
+        if i<= 51:
          
             fig.add_trace(go.Scatter(
                 x=x_fit,
@@ -72,6 +74,7 @@ if event == 'death':
                 name = state_names[i]+' fit data', # Style name/legend entry with html tags
                 connectgaps=True # override default to connect the gaps
             ))
+        
          
         fig.add_trace(go.Scatter(
             x=x_prediction,
@@ -131,7 +134,7 @@ else:
         name= state_names[i]+' Real data',
         ))
     
-        if i<51:
+        if i<=51:
          
             fig.add_trace(go.Scatter(
                 x=x_fit,
