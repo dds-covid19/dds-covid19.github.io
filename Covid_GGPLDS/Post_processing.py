@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime as dt
 
+<<<<<<< HEAD
 task = 'historic' #'historic''future'
 event = 'death'#'cases''death'
 if task == 'historic':
@@ -18,10 +19,19 @@ if task == 'historic':
 else:
     foldername = 'Future'
     TP = -23
+=======
+task = 'future' #'historic''future'
+event = 'death'#'cases''death'
+if task == 'historic':
+    foldername = 'Historic'
+else:
+    foldername = 'Future'
+>>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
 
 if event == 'death':
     death_mean = pd.read_csv('results/'+foldername+'_prediction/death_mean_.csv')
     death_mean = death_mean.rename(columns=death_mean.loc[0,:])
+<<<<<<< HEAD
     death_mean = death_mean.iloc[:,:]
     death_mean = (death_mean.drop(index=0))#.drop('01/22/0020',axis=1)
     death_lower = pd.read_csv('results/'+foldername+'_prediction/death_lowerBound_.csv')
@@ -31,6 +41,14 @@ if event == 'death':
     death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_.csv')
     death_higher = death_higher.rename(columns=death_higher.loc[0,:])
     death_higher= death_higher.iloc[:,:]
+=======
+    death_mean=(death_mean.drop(index=0))#.drop('01/22/0020',axis=1)
+    death_lower = pd.read_csv('results/'+foldername+'_prediction/death_lowerBound_.csv')
+    death_lower = death_lower.rename(columns=death_lower.loc[0,:])
+    death_lower = (death_lower.drop(index=0))#.drop('01/22/0020',axis=1)
+    death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_.csv')
+    death_higher = death_higher.rename(columns=death_higher.loc[0,:])
+>>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
     death_higher = (death_higher.drop(index=0))#.drop('01/22/0020',axis=1)
     realdata_death = realdata = pd.read_csv('data/new_death_cases.csv')
     
@@ -52,8 +70,11 @@ if event == 'death':
    # results_death.to_csv ('results/Future_prediction/furture_death_.csv', index = True, header=True)
     
     death_mean = pd.read_csv('results/'+foldername+'_prediction/death_mean_.csv')
+<<<<<<< HEAD
     death_mean.loc[51] = death_mean.loc[0:50].sum(axis=0)
     death_mean["Province_State"].loc[51] = "US"
+=======
+>>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
     death_lower = pd.read_csv('results/'+foldername+'_prediction/death_lowerBound_.csv')
     death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_.csv')
     death_mean_col = pd.melt(death_mean, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths')
@@ -105,8 +126,11 @@ else:
 #    results_cases.to_csv ('results/'+foldername+'_prediction/furture_death_.csv', index = True, header=True)
     
     cases_mean = pd.read_csv('results/'+foldername+'_prediction/daily_cases_mean_.csv')
+<<<<<<< HEAD
     cases_mean.loc[51] = cases_mean.loc[0:50].sum(axis=0)
     cases_mean["Province_State"].loc[51] = "US"
+=======
+>>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
     cases_lower = pd.read_csv('results/'+foldername+'_prediction/daily_cases_lowerBound_.csv')
     cases_higher = pd.read_csv('results/'+foldername+'_prediction/daily_cases_upperBound_.csv')
     cases_mean_col = pd.melt(cases_mean, id_vars=['Province_State'], var_name='date', value_name='number_of_daily_cases')
@@ -121,5 +145,51 @@ else:
     results_cases.to_csv ('results/'+foldername+'_prediction/'+foldername+'__daily_cases_.csv', index = True, header=True)
     
 
+<<<<<<< HEAD
 
+=======
+#    death_mean = pd.read_csv('results/Future_prediction/death_mean_.csv')
+#    death_mean = death_mean.rename(columns=death_mean.loc[0,:])
+#    death_mean=(death_mean.drop(index=0))#.drop('01/22/0020',axis=1)
+#    death_lower = pd.read_csv('results/Future_prediction/death_lowerBound_.csv')
+#    death_lower = death_lower.rename(columns=death_lower.loc[0,:])
+#    death_lower = (death_lower.drop(index=0))#.drop('01/22/0020',axis=1)
+#    death_higher = pd.read_csv('results/Future_prediction/death_upperBound_.csv')
+#    death_higher = death_higher.rename(columns=death_higher.loc[0,:])
+#    death_higher = (death_higher.drop(index=0))#.drop('01/22/0020',axis=1)
+#
+#
+#for i in range(1,53):
+#    death_mean.loc[i,'3/15/20':] =  pd.to_numeric(death_mean.loc[i,'3/15/20':],errors='coerce')
+#    death_lower.loc[i,'3/15/20':] =  pd.to_numeric(death_lower.loc[i,'3/15/20':],errors='coerce')
+#    death_higher.loc[i,'3/15/20':] =  pd.to_numeric(death_higher.loc[i,'3/15/20':],errors='coerce')
+#    
+#    
+#death_mean.to_csv ('results/Future_prediction/death_mean_.csv', index = False, header=True)
+#death_lower.to_csv ('results/Future_prediction/death_lowerBound_.csv', index = False, header=True)
+#death_higher.to_csv ('results/Future_prediction/death_upperBound_.csv', index = False, header=True)
+
+#realdata_death.loc[51] = realdata_death.sum(axis=0)
+#realdata_death["Province_State"].loc[51] = "US"
+#
+#real_death_col = pd.melt(realdata_death, id_vars=['Province_State'], var_name='date', value_name='real_number_of_deaths')
+#death_mean_col = pd.melt(death_mean, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths')
+#death_lower_col = pd.melt(death_lower, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths_lower')
+#death_higher_col = pd.melt(death_higher, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths_higher')
+#results_death= pd.merge(real_death_col, death_mean_col, how='outer', on=['Province_State', 'date'])
+#results_death= pd.merge(results_death, death_lower_col, how='outer', on=['Province_State', 'date'])
+#results_death= pd.merge(results_death, death_higher_col, how='outer', on=['Province_State', 'date'])
+##results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
+#results_death.to_csv ('results/Future_prediction/furture_death_.csv', index = True, header=True)
+#
+#death_mean = pd.read_csv('results/Historic_prediction/death_mean_.csv')
+#death_lower = pd.read_csv('results/Historic_prediction/death_lowerBound_.csv')
+#death_higher = pd.read_csv('results/Historic_prediction/death_upperBound_.csv')
+#death_mean_col = pd.melt(death_mean, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths')
+#death_lower_col = pd.melt(death_lower, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths_lower')
+#death_higher_col = pd.melt(death_higher, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths_higher')
+#results_death= pd.merge(death_mean_col, death_lower_col, how='outer', on=['Province_State', 'date'])
+#results_death= pd.merge(results_death, death_higher_col, how='outer', on=['Province_State', 'date'])
+#results_death.to_csv ('results/Historic_prediction/historic_death_.csv', index = True, header=True)
+>>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
 
