@@ -5,13 +5,8 @@ addAllToPath()
 %chose the dataset
 dataset_name = 'Covid19_newcases'% 'Lorenz','Pedestrian','Stock'
 %chose the task
-<<<<<<< HEAD
-task = 'prediction_historic'% 'interpretation','predeiction_historic', 'prediction_future'
-TypeofEvent =  'death';%'cases'
-=======
 task = 'prediction_future'% 'interpretation','predeiction_historic', 'prediction_future'
 TypeofEvent =  'cases';%'cases'
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
 % data reconstruction (time consuming due to Kalman smoothing)
 data_reconstruction_flag = 'no'% 'yes','no'
 
@@ -649,7 +644,7 @@ else
 
             
         end
-<<<<<<< HEAD
+
         if strcmp(task,'prediction_future')
             if strcmp(TypeofEvent , 'death')
                 XP_temp_cum =[];
@@ -712,7 +707,7 @@ else
             US_avg_weekly = [US_total_obse,US_avg_weekly];
             MyX_weekly = cat(1,MyX_weekly,US_avg_weekly);
         end
-=======
+
         if strcmp(TypeofEvent , 'death')
             XP_temp_cum =[];
             for t = 1:30
@@ -776,7 +771,7 @@ else
         
         
         
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
         
         X_reconp_avg = squeeze(mean(mean(XP_temp,4),2));
         MyX = cat(2, X_recon_avg, (X_reconp_avg));
@@ -799,9 +794,7 @@ else
             TrX = cat(1, TrX, sum(data5,1));
         end
         
-<<<<<<< HEAD
 
-=======
 %         for i = 1:size(X_W_avg(1:18,1:end),1)
 %             figure();%subplot(ceil(size(X_W_avg(1:18,1:end),1)/3),ceil(size(X_W_avg(1:18,1:end),1)/ceil(size(X_W_avg(1:18,1:end),1)/3)),i)
 %             plot(MyX(i,1:end))
@@ -823,8 +816,7 @@ else
 %         end 
 %         saveas(gcf,sprintf('%s%s%s%s %f %s %d.fig',Folder_name,'/',File_name,'_r0_data_figure_T_step_prediction1_training size_',portion,'_K',K))
 %         %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%5
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
-        
+
         X_reconp_avg2 = squeeze(mean(mean(XP_temp2,4),2));
         MyX2 = cat(2, X_recon_avg, (X_reconp_avg2));
         %TrX = cat(2, TRdata, TEdata);
@@ -832,31 +824,28 @@ else
             figure()
             temp11 = permute(squeeze(XP_temp(i,:,:,:)),[1 3 2]);
             temp11 = reshape(temp11,[],size(temp11,3),1);
-<<<<<<< HEAD
             xxx=[T_S+1:T_S+T_P];
             shadedErrorBar(xxx,temp11,{@mean,@(xxx) CI_values(xxx)},'lineProps',{'b','markerfacecolor','r'})
             temp22 = CI_values(temp11);
             state_upperBound(i,:)= temp22(1,:);
             state_lowerBound(i,:)= temp22(2,:);
             if strcmp(TypeofEvent , 'death') &&  strcmp(task,'prediction_future')
-=======
-            if strcmp(TypeofEvent , 'death')
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
-                temp33 = permute(squeeze(XP_temp_cum(i,:,:,:)),[1 3 2]);
-                temp33 = reshape(temp33,[],size(temp33,3),1);
-                temp44 = CI_values_all(temp33);
-                state_Bound_cum(i,:,:)= temp44;
-               
-            end
-<<<<<<< HEAD
-           
+                if strcmp(TypeofEvent , 'death')
+                    temp33 = permute(squeeze(XP_temp_cum(i,:,:,:)),[1 3 2]);
+                    temp33 = reshape(temp33,[],size(temp33,3),1);
+                    temp44 = CI_values_all(temp33);
+                    state_Bound_cum(i,:,:)= temp44;
+
+                end
+                
+
              if strcmp(task,'prediction_future')
                 temp55 = permute(squeeze(XP_temp_weekly(i,:,:,:)),[1 3 2]);
                 temp55 = reshape(temp55,[],size(temp55,3),1);
                 temp66 = CI_values_all(temp55);
                 state_Bound_weekly(i,:,:) = temp66;
              end
-            
+            end
             hold on;
             plot([1:T_S+T_P], MyX(i,1:end), 'b');
 
@@ -865,10 +854,11 @@ else
 %             plot([1:T_S+T_P], MyX2(i,1:end), 'b');
 %             hold on
             if strcmp(task,'prediction_future')
-                plot([1:T_S+T_P],TrX(i,1:end),'r')
+                plot([1:T_S],TrX(i,1:end),'r')
             else
                 plot([1:T_S+T_P],TrX(i,1:end),'r')
-=======
+            end
+
             xxx=[T_S+1:T_S+T_P];
             shadedErrorBar(xxx,temp11,{@mean,@(xxx) CI_values(xxx)},'lineProps',{'b','markerfacecolor','r'})
             temp22 = CI_values(temp11);
@@ -906,7 +896,7 @@ else
                 plot([1:T_S+T_P],TrX(i,1:end),'r')
             else
                 plot([1:T_S],TrX(i,1:end),'r')
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
             end
             hold on 
             xline(T_S,'--k');
@@ -920,11 +910,8 @@ else
                 saveas(gcf,sprintf('%s%s%s%s%s%s %f %s %d.jpg',Folder_name,'/',Folder_name1,'/',File_name1,'_daily_cases_prediction_',portion,'_K',K));
             end
         end
-<<<<<<< HEAD
+        
 
-
-=======
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
         
         if strcmp(task,'prediction_historic')
             T_means = data;
@@ -938,38 +925,30 @@ else
             T_means = data;
             T_upperbound = data;
             T_lowerbound = data;
-            
-<<<<<<< HEAD
+
             last_day = datetime(data{1,end},'Format', 'M/d/yy');
             last_pred_day = daysadd(last_day,T_P);
-=======
+
             
             T_weekly = data;
             
             
             last_day = datetime(data{1,end},'Format', 'M/d/yy');
             last_pred_day = daysadd(last_day,30);
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
             T_means{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             T_means{2:end,T_initial:T_initial+T_S+T_P-1}=num2cell(MyX);
             T_upperbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             T_upperbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_upperBound);
             T_lowerbound{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             T_lowerbound{2:end,T_initial+T_S:T_initial+T_S+T_P-1}=num2cell(state_lowerBound);
-            
-<<<<<<< HEAD
+
             T_weekly = data;
-=======
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
             
             if strcmp(TypeofEvent , 'death')
                 T_cum = data;
                 last_day = datetime(data{1,end},'Format', 'M/d/yy');
-<<<<<<< HEAD
                 last_pred_day = daysadd(last_day,T_P);
-=======
                 last_pred_day = daysadd(last_day,30);
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
                 T_cum{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
                 q_list =[0.01, 0.025, 0.05, 0.10, 0.15, 0.2, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 0.975, 0.99 ];
                 for i =1:(length(q_list)+1)
@@ -995,11 +974,8 @@ else
             
             
             last_day = datetime(data{1,end},'Format', 'M/d/yy');
-<<<<<<< HEAD
             last_pred_day = daysadd(last_day,T_P);
-=======
             last_pred_day = daysadd(last_day,30);
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
             T_weekly{1,T_initial+T_S:T_initial+T_S+T_P-1} = cellstr(last_day+1:last_pred_day);
             q_list =[0.01, 0.025, 0.05, 0.10, 0.15, 0.2, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50, 0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 0.975, 0.99 ];
             
@@ -1035,7 +1011,7 @@ else
                 %save(filename_workspace)
                 writetable(T_upperbound,filename_table) 
                 
-<<<<<<< HEAD
+
                 if strcmp(task,'prediction_future')
                      filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_cum','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
                     %save(filename_workspace)
@@ -1045,16 +1021,10 @@ else
                     %save(filename_workspace)
                     writetable(T_weekly,filename_table)
                 end
-=======
+
                 
-                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_cum','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-                %save(filename_workspace)
-                writetable(T_cum,filename_table)
-                
-                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','death','_weekly','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-                %save(filename_workspace)
-                writetable(T_weekly,filename_table)
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+                 
+
                
           elseif strcmp(TypeofEvent , 'cases')
                 filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_mean_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
@@ -1066,19 +1036,15 @@ else
                  filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_upperBound_','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
                 %save(filename_workspace)
                 writetable(T_upperbound,filename_table)
-<<<<<<< HEAD
+
                 if strcmp(task,'prediction_future')
                 
                     filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_weekly','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
                     %save(filename_workspace)
                     writetable(T_weekly,filename_table)
                 end
-=======
-                
-                filename_table =  sprintf('%s%s%s%s%s%s',Folder_name,'/',Folder_name1,'/','daily_cases','_weekly','.csv')%sprintf('%s%s%s %f %s %d',Folder_name,'/',File_name,portion,'_K',K,'.mat')
-                %save(filename_workspace)
-                writetable(T_weekly,filename_table)
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
+               
           end
         
       
@@ -1092,6 +1058,7 @@ else
     else
         fprintf('task is not recognized\n');
         quit
+        
     end
     if  strcmp(data_reconstruction_flag,'yes')
          X_recon_avg1 = data_reconstruction(X,X_w,S0_col,S_col,Phi_prime_col,W_col,Z_col,Phi_col,D_col)

@@ -54,12 +54,10 @@ if event == 'death':
     death_weekly=(death_weekly.drop(index=0))#.drop('01/22/0020',axis=1)
     daily_cases_weekly = daily_cases_weekly.rename(columns= daily_cases_weekly.loc[0,:])
     daily_cases_weekly = (daily_cases_weekly.drop(index=0))#.drop('01/22/0020',axis=1)
-<<<<<<< HEAD
     #daily_cases_weekly =  daily_cases_weekly_col['type'].loc[daily_cases_weekly_col['type'] =='NA' | daily_cases_weekly_col['type']=='0.025' | daily_cases_weekly_col['type']=='0.1'| daily_cases_weekly_col['type']== '0.25'| daily_cases_weekly_col['type']=='0.500'| daily_cases_weekly_col['type']== '0.750'| daily_cases_weekly_col['type']=='0.900'| daily_cases_weekly_col['type']=='0.975']
     daily_cases_weekly_col1 = []
     
-    
-=======
+
     #aily_cases_weekly  =  pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly.csv')
 #    death_lower = pd.read_csv('results/'+foldername+'_prediction/death_lowerBound_cum.csv')
 #    death_lower = death_lower.rename(columns=death_lower.loc[0,:])
@@ -67,7 +65,7 @@ if event == 'death':
 #    death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_cum.csv')
 #    death_higher = death_higher.rename(columns=death_higher.loc[0,:])
 #    death_higher = (death_higher.drop(index=0))#.drop('01/22/0020',axis=1)
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
     realdata_death = realdata = pd.read_csv('data/new_death_cases.csv')
     
     
@@ -100,7 +98,7 @@ if event == 'death':
     death_weekly_col = pd.melt(death_weekly, id_vars=['Province_State','type'], var_name='date', value_name='number_of_deaths')
     
     results_death_weekly= death_weekly_col#pd.merge(real_death_col, death_mean_col, how='outer', on=['Province_State', 'date'])
-<<<<<<< HEAD
+
    
     daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
     
@@ -110,20 +108,20 @@ if event == 'death':
         temp = daily_cases_weekly_col.loc[daily_cases_weekly_col['type'] ==qq]
         daily_cases_weekly_col1 = daily_cases_weekly_col1.append(temp)
     results_daily_cases_weekly= daily_cases_weekly_col1#pd.merge(real_death_col, death_mean_col, how='outer', on=['Province_State', 'date'])
-    
-=======
+
     #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
     #results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_cum.csv', index = True, header=True)
     
-    daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
+    #daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
     
-    daily_cases_weekly_col = pd.melt(daily_cases_weekly, id_vars=['Province_State','type'], var_name='date', value_name='number_of_deaths')
+
+    #daily_cases_weekly_col = pd.melt(daily_cases_weekly, id_vars=['Province_State','type'], var_name='date', value_name='number_of_deaths')
     
-    results_daily_cases_weekly= daily_cases_weekly_col#pd.merge(real_death_col, death_mean_col, how='outer', on=['Province_State', 'date'])
+    #results_daily_cases_weekly= daily_cases_weekly_col#pd.merge(real_death_col, death_mean_col, how='outer', on=['Province_State', 'date'])
     #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
     #results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_cum.csv', index = True, header=True)
 
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
 
 
 if event == 'death':
@@ -134,11 +132,9 @@ if event == 'death':
         results_death['date'] = pd.to_datetime(results_death.date).dt.strftime('%Y-%m-%d')
         results_death_weekly['date'] = pd.to_datetime(results_death_weekly.date).dt.strftime('%Y-%m-%d')
         results_daily_cases_weekly['date'] = pd.to_datetime(results_death_weekly.date).dt.strftime('%Y-%m-%d')
-<<<<<<< HEAD
+
         today= dt.today() 
-=======
-        today= dt.today() - datetime.timedelta(days=2)
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+        #today= dt.today() - datetime.timedelta(days=2)
         today_date = today.strftime('%Y-%m-%d')
         #results_death.insert(0, 'model', 'UT-GGPNBLDS')
         results_death.insert(0, 'forecast_date', today_date)
@@ -161,15 +157,26 @@ if event == 'death':
             temp_df = results_death.loc[results_death['date'] == temp_date]
             temp_df.insert(2,'target',str(i+1)+' wk ahead cum death')
             
+           
+                
             temp_df_weekly = results_death_weekly.loc[results_death_weekly['date'] == temp_date]
-            temp_df_weekly.insert(2,'target',str(i+1)+' wk ahead inc death')
+            
             
             temp_df_cases_weekly = results_daily_cases_weekly.loc[results_daily_cases_weekly['date'] == temp_date]
-<<<<<<< HEAD
+            
+            
+            if i==0:
+                sunday_date = today + datetime.timedelta(days= -1)
+                sunday_date = sunday_date.strftime('%Y-%m-%d')
+                sunday_results_death = results_death_weekly.loc[results_death_weekly['date'] == sunday_date]
+                sunday_results_cases = results_daily_cases_weekly.loc[results_death_weekly['date'] == sunday_date]
+                temp_df_weekly['number_of_deaths'] = temp_df_weekly['number_of_deaths'] + sunday_results_death['number_of_deaths'].values
+                temp_df_cases_weekly['number_of_deaths'] = temp_df_cases_weekly['number_of_deaths'] + sunday_results_cases['number_of_deaths'].values
+                
+            
+            temp_df_weekly.insert(2,'target',str(i+1)+' wk ahead inc death')
             temp_df_cases_weekly.insert(2,'target',str(i+1)+' wk ahead inc case')
-=======
-            temp_df_cases_weekly.insert(2,'target',str(i+1)+' wk ahead inc cases')
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+                
             if i ==0:
                 cdc_df = temp_df
                 cdc_df = cdc_df.append(temp_df_weekly)

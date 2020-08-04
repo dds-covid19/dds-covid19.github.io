@@ -22,8 +22,8 @@ import plotly.graph_objects as go
 import pandas as pd
 import numpy as np 
 
-task = 'historic' #'historic''future'
-event = 'death'#'cases''death'
+task = 'future' #'historic''future'
+event = 'cases'#'cases''death'
 if task == 'historic':
     foldername = 'Historic'
 else:
@@ -36,9 +36,11 @@ else:
 
 if event == 'death':
     
-    death_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__'+sfilename+'_.csv').drop('Unnamed: 0', axis=1)
+    death_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__'+sfilename+'_2020_08_03.csv').drop('Unnamed: 0', axis=1)
     state_names = np.unique(death_['Province_State'])
-
+    temp=np.append(state_names[45],state_names[0:45])
+    state_names=np.append(temp,state_names[46:])
+    state_names =np.append(state_names[0:40],state_names[41:])
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
     app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
@@ -47,19 +49,13 @@ if event == 'death':
         temp = death_.loc[death_['Province_State'] == state_names[i]]
         x_prediction = temp['date'].iloc[-7:]
         y_prediction = temp['number_of_deaths'].iloc[-7:]
-<<<<<<< HEAD
-       
-=======
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
         y_lower = temp['number_of_deaths_lower'].iloc[-7:]
         y_higher = temp['number_of_deaths_higher'].iloc[-7:]
        
         x_fit = temp['date'].iloc[52:-7]
         y_fit = temp['number_of_deaths'].iloc[52:-7]
-<<<<<<< HEAD
-       
-=======
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
         
         x_real = temp['date']
         y_real = temp['real_number_of_deaths']
@@ -72,11 +68,10 @@ if event == 'death':
         name= state_names[i]+' Real data',
     ))
     
-<<<<<<< HEAD
-        if i<= 51:
-=======
-        if i<51:
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
+
+   
+        if i<=51:
+
          
             fig.add_trace(go.Scatter(
                 x=x_fit,
@@ -84,15 +79,11 @@ if event == 'death':
                 name = state_names[i]+' fit data', # Style name/legend entry with html tags
                 connectgaps=True # override default to connect the gaps
             ))
-<<<<<<< HEAD
-        
-=======
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
-         
+
         fig.add_trace(go.Scatter(
             x=x_prediction,
             y=y_prediction,
-            name = state_names[i]+ ' mean of predictions', # Style name/legend entry with html tags
+            name = state_names[i]+ ' forecase mean', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
@@ -102,7 +93,7 @@ if event == 'death':
             mode='lines',
             line=dict(width=0.5, color='rgb(131, 90, 241)'),
             #stackgroup='one',
-            name = state_names[i] + ' Lower bound', # Style name/legend entry with html tags
+            name = state_names[i] + ' forecast 2.5 th precentile', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
@@ -114,14 +105,17 @@ if event == 'death':
             line=dict(width=0.5, color='rgb(131, 90, 241)'),
             fill='tonexty',
             #stackgroup='one', # define stack group
-            name = state_names[i]+' Upper bound', # Style name/legend entry with html tags
+            name = state_names[i]+' forecast 97.5 th precentile', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
 else:
 
-    cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_.csv').drop('Unnamed: 0', axis=1)
+    cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_03.csv').drop('Unnamed: 0', axis=1)
     state_names = np.unique(cases_['Province_State'])
+    temp=np.append(state_names[44],state_names[0:44])
+    state_names=np.append(temp,state_names[45:])
+    
 
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
@@ -147,11 +141,8 @@ else:
         name= state_names[i]+' Real data',
         ))
     
-<<<<<<< HEAD
+
         if i<=51:
-=======
-        if i<51:
->>>>>>> d69d2e59d4366d3c88cc2cacde2ff2d6e07a4e0c
          
             fig.add_trace(go.Scatter(
                 x=x_fit,
@@ -163,7 +154,7 @@ else:
         fig.add_trace(go.Scatter(
             x=x_prediction,
             y=y_prediction,
-            name = state_names[i]+ ' mean of predictions', # Style name/legend entry with html tags
+            name = state_names[i]+ ' forecase mean', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
@@ -173,7 +164,7 @@ else:
             mode='lines',
             line=dict(width=0.5, color='rgb(131, 90, 241)'),
             #stackgroup='one',
-            name = state_names[i] + ' Lower bound', # Style name/legend entry with html tags
+            name = state_names[i] + ' forecast 2.5 th precentile', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
@@ -185,7 +176,7 @@ else:
             line=dict(width=0.5, color='rgb(131, 90, 241)'),
             fill='tonexty',
             #stackgroup='one', # define stack group
-            name = state_names[i]+' Upper bound', # Style name/legend entry with html tags
+            name = state_names[i]+' forecast 97.5 th precentile', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
