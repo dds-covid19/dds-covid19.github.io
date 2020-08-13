@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Province_State,8/9/20
 Alabama,1768
 Alaska,26
@@ -50,3 +51,57 @@ Washington,1688
 West Virginia,139
 Wisconsin,998
 Wyoming,28
+=======
+Province_State,8/2/20
+Alabama,1627
+Alaska,24
+Arizona,3765
+Arkansas,464
+California,9396
+Colorado,1844
+Connecticut,4432
+Delaware,585
+District of Columbia,584
+Florida,7084
+Georgia,3840
+Hawaii,26
+Idaho,197
+Illinois,7714
+Indiana,2975
+Iowa,878
+Kansas,361
+Kentucky,742
+Louisiana,4007
+Maine,123
+Maryland,3515
+Massachusetts,8638
+Michigan,6457
+Minnesota,1654
+Mississippi,1703
+Missouri,1276
+Montana,61
+Nebraska,332
+Nevada,832
+New Hampshire,417
+New Jersey,15836
+New Mexico,654
+New York,32710
+North Carolina,1983
+North Dakota,105
+Ohio,3529
+Oklahoma,550
+Oregon,326
+Pennsylvania,7223
+Rhode Island,1007
+South Carolina,1777
+South Dakota,135
+Tennessee,1073
+Texas,6878
+Utah,311
+Vermont,57
+Virginia,2218
+Washington,1596
+West Virginia,117
+Wisconsin,948
+Wyoming,26
+>>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d

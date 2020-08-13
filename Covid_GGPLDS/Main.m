@@ -708,9 +708,73 @@ else
             MyX_weekly = cat(1,MyX_weekly,US_avg_weekly);
         end
 
+<<<<<<< HEAD
         
         
        
+=======
+        if strcmp(TypeofEvent , 'death')
+            XP_temp_cum =[];
+            for t = 1:30
+                if t==1
+                    XP_temp_cum(:,:,t,:)=XP_temp(:,:,t,:)+LCT_data;
+                else
+                    XP_temp_cum(:,:,t,:)=XP_temp(:,:,t,:)+XP_temp_cum(:,:,t-1,:);
+                end
+            end
+            X_reconp_avg_cum = (squeeze(mean(mean(XP_temp_cum,4),2)));
+            MyX_cum = cat(2, X_recon_avg, (X_reconp_avg_cum));
+            %TrX = cat(2, TRdata, TEdata);
+            state_means_cum = squeeze(mean(squeeze(mean(XP_temp_cum,2)),3));
+
+            US_total_obse = sum(data5(:,1:T_S),1);
+            US_recon_avg = squeeze(sum(X_recon_avg,1));
+            US_total_pred_cum = (sum(XP_temp_cum,1));
+            XP_temp_cum =cat(1,XP_temp_cum,US_total_pred_cum);
+            US_total_pred_cum = permute(squeeze(US_total_pred_cum),[1 3 2]);
+            US_avg_cum = squeeze(mean(squeeze(mean(US_total_pred_cum,2)),1));
+            state_means_cum = ([state_means_cum;US_avg_cum]);
+            US_avg_cum = [US_total_obse,US_avg_cum];
+            MyX_cum = cat(1,MyX_cum,US_avg_cum);
+        end
+        
+        XP_temp_weekly =[];
+        for j = 1:4
+            if j==1
+                TWS = 1;
+                TWE = 6;
+            elseif j<4
+                TWS = 6 + 7*(j-2)+1;
+                TWE = 6 + 7*(j-1);
+            else
+                TWS = 6 + 7*(j-2)+1;
+                TWE = T_P;
+            end
+            for t =TWS:TWE
+                if t== TWS
+                    XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:);
+                else
+                    XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:)+XP_temp_weekly(:,:,t-1,:);
+                end
+            end
+        end
+        X_reconp_avg_weekly = (squeeze(mean(mean(XP_temp_weekly,4),2)));
+        MyX_weekly = cat(2, X_recon_avg, (X_reconp_avg_weekly));
+        %TrX = cat(2, TRdata, TEdata);
+        state_means_weekly = squeeze(mean(squeeze(mean(XP_temp_weekly,2)),3));
+        
+        US_total_obse = sum(data5(:,1:T_S),1);
+        US_recon_avg = squeeze(sum(X_recon_avg,1));
+        US_total_pred_weekly = (sum(XP_temp_weekly,1));
+        XP_temp_weekly =cat(1,XP_temp_weekly,US_total_pred_weekly);
+        US_total_pred_weekly = permute(squeeze(US_total_pred_weekly),[1 3 2]);
+        US_avg_weekly = squeeze(mean(squeeze(mean(US_total_pred_weekly,2)),1));
+        state_means_weekly = ([state_means_weekly;US_avg_weekly]);
+        US_avg_weekly = [US_total_obse,US_avg_weekly];
+        MyX_weekly = cat(1,MyX_weekly,US_avg_weekly);
+        
+        
+>>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
         
         
 
@@ -781,12 +845,21 @@ else
                 end
                 
 
+<<<<<<< HEAD
 %              if strcmp(task,'prediction_future')
 %                 temp55 = permute(squeeze(XP_temp_weekly(i,:,:,:)),[1 3 2]);
 %                 temp55 = reshape(temp55,[],size(temp55,3),1);
 %                 temp66 = CI_values_all(temp55);
 %                 state_Bound_weekly(i,:,:) = temp66;
 %              end
+=======
+             if strcmp(task,'prediction_future')
+                temp55 = permute(squeeze(XP_temp_weekly(i,:,:,:)),[1 3 2]);
+                temp55 = reshape(temp55,[],size(temp55,3),1);
+                temp66 = CI_values_all(temp55);
+                state_Bound_weekly(i,:,:) = temp66;
+             end
+>>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
             end
             hold on;
             plot([1:T_S+T_P], MyX(i,1:end), 'b');
@@ -801,6 +874,7 @@ else
                 plot([1:T_S+T_P],TrX(i,1:end),'r')
             end
 
+<<<<<<< HEAD
 %             xxx=[T_S+1:T_S+T_P];
 %             shadedErrorBar(xxx,temp11,{@mean,@(xxx) CI_values(xxx)},'lineProps',{'b','markerfacecolor','r'})
 %             temp22 = CI_values(temp11);
@@ -809,6 +883,16 @@ else
             temp66 = CI_values_all(temp55);
 %             state_upperBound(i,:)= temp22(1,:);
 %             state_lowerBound(i,:)= temp22(2,:);
+=======
+            xxx=[T_S+1:T_S+T_P];
+            shadedErrorBar(xxx,temp11,{@mean,@(xxx) CI_values(xxx)},'lineProps',{'b','markerfacecolor','r'})
+            temp22 = CI_values(temp11);
+            temp55 = permute(squeeze(XP_temp_weekly(i,:,:,:)),[1 3 2]);
+            temp55 = reshape(temp55,[],size(temp55,3),1);
+            temp66 = CI_values_all(temp55);
+            state_upperBound(i,:)= temp22(1,:);
+            state_lowerBound(i,:)= temp22(2,:);
+>>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
             
             state_Bound_weekly(i,:,:) = temp66;
             % std_temp11 = std(temp11);

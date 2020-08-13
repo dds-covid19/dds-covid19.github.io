@@ -111,9 +111,22 @@ if event == 'death':
 
     #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
     #results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_cum.csv', index = True, header=True)
+<<<<<<< HEAD
+=======
+    
+    #daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
+>>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
     
     #daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
     
+
+    #daily_cases_weekly_col = pd.melt(daily_cases_weekly, id_vars=['Province_State','type'], var_name='date', value_name='number_of_deaths')
+    
+    #results_daily_cases_weekly= daily_cases_weekly_col#pd.merge(real_death_col, death_mean_col, how='outer', on=['Province_State', 'date'])
+    #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
+    #results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_cum.csv', index = True, header=True)
+
+
 
     #daily_cases_weekly_col = pd.melt(daily_cases_weekly, id_vars=['Province_State','type'], var_name='date', value_name='number_of_deaths')
     
@@ -165,6 +178,7 @@ if event == 'death':
             temp_df_cases_weekly = results_daily_cases_weekly.loc[results_daily_cases_weekly['date'] == temp_date]
             
             
+<<<<<<< HEAD
 #            if i==0:
 #                sunday_date = today + datetime.timedelta(days= -1)
 #                sunday_date = sunday_date.strftime('%Y-%m-%d')
@@ -172,6 +186,15 @@ if event == 'death':
 #                sunday_results_cases = results_daily_cases_weekly.loc[results_death_weekly['date'] == sunday_date]
 #                temp_df_weekly['number_of_deaths'] = temp_df_weekly['number_of_deaths'] + sunday_results_death['number_of_deaths'].values
 #                temp_df_cases_weekly['number_of_deaths'] = temp_df_cases_weekly['number_of_deaths'] + sunday_results_cases['number_of_deaths'].values
+=======
+            if i==0:
+                sunday_date = today + datetime.timedelta(days= -1)
+                sunday_date = sunday_date.strftime('%Y-%m-%d')
+                sunday_results_death = results_death_weekly.loc[results_death_weekly['date'] == sunday_date]
+                sunday_results_cases = results_daily_cases_weekly.loc[results_death_weekly['date'] == sunday_date]
+                temp_df_weekly['number_of_deaths'] = temp_df_weekly['number_of_deaths'] + sunday_results_death['number_of_deaths'].values
+                temp_df_cases_weekly['number_of_deaths'] = temp_df_cases_weekly['number_of_deaths'] + sunday_results_cases['number_of_deaths'].values
+>>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
                 
             
             temp_df_weekly.insert(2,'target',str(i+1)+' wk ahead inc death')
