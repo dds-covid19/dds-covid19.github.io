@@ -8,6 +8,36 @@
 	
 	<title>DDS-COVID-19</title>
 	
+<SCRIPT language=javascript type="text/javascript">
+
+function showDiv1() {
+	document.getElementById("iframe1").style.display = "block";
+	document.getElementById("iframe2").style.display = "none";
+	document.getElementById("iframe3").style.display = "none";
+	document.getElementById("iframe4").style.display = "none";
+}
+
+function showDiv2() {
+	document.getElementById("iframe1").style.display = "none"
+	document.getElementById("iframe2").style.display = "block";
+	document.getElementById("iframe3").style.display = "none";
+	document.getElementById("iframe4").style.display = "none";
+}
+
+function showDiv3() {
+	document.getElementById("iframe1").style.display = "none"
+	document.getElementById("iframe2").style.display = "none";
+	document.getElementById("iframe3").style.display = "block";
+	document.getElementById("iframe4").style.display = "none";
+}
+
+function showDiv4() {
+	document.getElementById("iframe1").style.display = "none"
+	document.getElementById("iframe2").style.display = "none";
+	document.getElementById("iframe3").style.display = "none";
+	document.getElementById("iframe4").style.display = "block";
+}
+</SCRIPT>
 	
 </head>
 <body>
@@ -44,55 +74,26 @@
 		<script src="src/method.js"></script>
 
 
+		
+<h1>
+<A HREF="#" onClick="showDiv1(); return false;">Forecast of Daily COVID-19 Deaths</a>&nbsp&nbsp
+
+<A HREF="#" onClick="showDiv2(); return false;">Forecast of Daily COVID-19 Cases</a>&nbsp&nbsp
+
+<A HREF="#" onClick="showDiv3(); return false;">Verification of Forecast of Deaths</a>&nbsp&nbsp
+
+<A HREF="#" onClick="showDiv4(); return false;">Verification of Forecast of Cases</a>
+</h1>
+
+
+		<embed  id="iframe1"  scrolling="no" style="display:block;" seamless="seamless" src="images/fig_Future_death.html" height="500" width="1200">
+		<embed  id="iframe2"  scrolling="no" style="display:none;" seamless="seamless" src="images/fig_Future_daily_cases.html" height="500" width="1200">
+		<embed  id="iframe3"  scrolling="no" style="display:none;" seamless="seamless" src="images/fig_Historic_death.html" height="500" width="1200">
+		<embed  id="iframe4"  scrolling="no" style="display:none;" seamless="seamless" src="images/fig_Historic_daily_cases.html" height="500" width="1200">
+
 
 		
-		<h1><a href="index.html">Forecast of Daily COVID-19 Deaths</a>&nbsp&nbsp&nbsp&nbsp    <a href="case_prediction.html">Forecast of Daily COVID-19 Cases</a></h1>
-
-		
-		<h1><a href="death_verify.html">Verification of Forecast of Deaths</a>&nbsp&nbsp&nbsp&nbsp    <a href="case_verify.html">Verification of Forecast of Cases</a></h1>
-
-
-
-		
-		<iframe id="igraph" scrolling="no" style="border:none;" seamless="seamless" src="images/GGPLDS/fig_Future_death.html" height="500" width="1200"></iframe>
-		
-		<!--<embed type="text/html" src="images/GGPLDS/fig_Future_death.html" width="1200" height="600">-->
-		
-		
-		
-		
-		<!--
-		<h1><a href="images/GGPLDS/fig_Future_daily_cases.html">Prediction of Daily COVID-19 Cases</a></h1>
-		
-		<embed type="text/html" src="images/GGPLDS/fig_Future_daily_cases.html" width="1000" height="500">
-		
-		<form action="">
-		 
-							<select  id="" onchange="window.location=this.value">
-								<option >Show the results with DPGDS</option>
-								<option value="images/DPGDS/fig_Future_death.html">Prediction of Daily COVID-19 Deaths</option>
-								<option value="images/DPGDS/fig_Future_daily_cases.html">Prediction of Daily reported cases of COVID-19</option>
-								<option value="images/DPGDS/fig_Historic_death.html">Prediction of Historic Daily COVID-19 Deaths</option>								
-								<option value="images/DPGDS/fig_Historic_daily_cases.html">Prediction of Daily reported cases of COVID-19</option>
-							  
-							</select>
-		</form>
-		
-		<form action="">
-		 
-							<select  id="" onchange="window.location=this.value">
-								<option >Show the results with GGPLDS</option>
-								<option value="images/GGPLDS/fig_Future_death.html">Prediction of Daily COVID-19 Deaths</option>
-								<option value="images/GGPLDS/fig_Future_daily_cases.html">Prediction of Daily reported cases of COVID-19</option>
-								<option value="images/GGPLDS/fig_Historic_death.html">Prediction of Historic Daily COVID-19 Deaths</option>								
-								<option value="images/GGPLDS/fig_Historic_daily_cases.html">Prediction of Daily reported cases of COVID-19</option>
-							  
-							</select>
-		</form>
-				
--->
-		
-		<p class="credits">&copy; June 2020, Mingyuan Zhou<br />
+		<p class="credits">&copy; August 2020, Mingyuan Zhou<br />
 		</ul>
 	</div>
 </body>
