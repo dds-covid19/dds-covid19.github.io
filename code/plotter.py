@@ -50,11 +50,11 @@ if event == 'death':
     for i in range (52):
         temp = death_.loc[death_['Province_State'] == state_names[i]]
 
-        x_prediction = temp['date'].iloc[-30:]
-        y_prediction = temp['number_of_deaths'].iloc[-30:]
+        x_prediction = temp['date'].iloc[-30:-15]
+        y_prediction = temp['number_of_deaths'].iloc[-30:-15]
 
-        y_lower = temp['number_of_deaths_lower'].iloc[-30:]
-        y_higher = temp['number_of_deaths_higher'].iloc[-30:]
+        y_lower = temp['number_of_deaths_lower'].iloc[-30:-15]
+        y_higher = temp['number_of_deaths_higher'].iloc[-30:-15]
        
         x_fit = temp['date'].iloc[52:-30]
         y_fit = temp['number_of_deaths'].iloc[52:-30]
@@ -118,8 +118,6 @@ else:
 
     cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_10.csv').drop('Unnamed: 0', axis=1)
 
-    
-
     state_names = np.unique(cases_['Province_State'])
     temp=np.append(state_names[44],state_names[0:44])
     state_names=np.append(temp,state_names[45:])
@@ -131,10 +129,10 @@ else:
     fig = go.Figure()
     for i in range (52):
         temp = cases_.loc[cases_['Province_State'] == state_names[i]]
-        x_prediction = temp['date'].iloc[-30:]
-        y_prediction = temp['number_of_daily_cases'].iloc[-30:]
-        y_lower = temp['number_of_daily_cases_lower'].iloc[-30:]
-        y_higher = temp['number_of_daily_cases_higher'].iloc[-30:]
+        x_prediction = temp['date'].iloc[-30:-15]
+        y_prediction = temp['number_of_daily_cases'].iloc[-30:-15]
+        y_lower = temp['number_of_daily_cases_lower'].iloc[-30:-15]
+        y_higher = temp['number_of_daily_cases_higher'].iloc[-30:-15]
        
         x_fit = temp['date'].iloc[52:-30]
         y_fit = temp['number_of_daily_cases'].iloc[52:-30]
