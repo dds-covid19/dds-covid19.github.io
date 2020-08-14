@@ -36,25 +36,20 @@ else:
 
 if event == 'death':
     
-<<<<<<< HEAD
+
     death_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__'+sfilename+'_2020_08_10.csv').drop('Unnamed: 0', axis=1)
     state_names = np.unique(death_['Province_State'])
     temp=np.append(state_names[44],state_names[0:44])
     state_names=np.append(temp,state_names[45:])
-=======
-    death_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__'+sfilename+'_2020_08_03.csv').drop('Unnamed: 0', axis=1)
-    state_names = np.unique(death_['Province_State'])
-    temp=np.append(state_names[45],state_names[0:45])
-    state_names=np.append(temp,state_names[46:])
-    state_names =np.append(state_names[0:40],state_names[41:])
->>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
+
+
     external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
     app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
     fig = go.Figure()
     for i in range (52):
         temp = death_.loc[death_['Province_State'] == state_names[i]]
-<<<<<<< HEAD
+
         x_prediction = temp['date'].iloc[-30:]
         y_prediction = temp['number_of_deaths'].iloc[-30:]
 
@@ -63,16 +58,7 @@ if event == 'death':
        
         x_fit = temp['date'].iloc[52:-30]
         y_fit = temp['number_of_deaths'].iloc[52:-30]
-=======
-        x_prediction = temp['date'].iloc[-7:]
-        y_prediction = temp['number_of_deaths'].iloc[-7:]
 
-        y_lower = temp['number_of_deaths_lower'].iloc[-7:]
-        y_higher = temp['number_of_deaths_higher'].iloc[-7:]
-       
-        x_fit = temp['date'].iloc[52:-7]
-        y_fit = temp['number_of_deaths'].iloc[52:-7]
->>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
 
         
         x_real = temp['date']
@@ -129,11 +115,11 @@ if event == 'death':
         
 else:
 
-<<<<<<< HEAD
+
     cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_10.csv').drop('Unnamed: 0', axis=1)
-=======
-    cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_03.csv').drop('Unnamed: 0', axis=1)
->>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
+
+    
+
     state_names = np.unique(cases_['Province_State'])
     temp=np.append(state_names[44],state_names[0:44])
     state_names=np.append(temp,state_names[45:])
