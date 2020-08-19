@@ -89,14 +89,14 @@ elseif strcmp(dataset_name,'FHZ')
      
     %load('data/Covid19_newcase.mat')
     if strcmp(TypeofEvent , 'death')
-        TT = readtable('data/new_death_cases.csv');
+        TT = readtable('data/new_death_cases_2020_08_16.csv');
         LastCumDeath_T = readtable('data/last_cum_death_cases.csv');
         LCT = LastCumDeath_T{2:end,2};
         LCT_data = [];
         LCT_data=[LCT_data; cellfun(@str2num, LCT(:,1))];
         %TT2 = readtable('data/new_daily_cases.csv');
     elseif strcmp(TypeofEvent , 'cases')
-        TT = readtable('data/new_daily_cases.csv');
+        TT = readtable('data/new_daily_cases_2020_08_16.csv');
        % LastCumDeath_T = readtable('data/last_cum_cases.csv');
     end
     

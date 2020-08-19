@@ -13,7 +13,7 @@ from datetime import datetime as dt
 
 task = 'future' #'historic''future'
 
-event = 'death'#'cases''death'
+event = 'cases'#'cases''death'
 
 
 if task == 'historic':
@@ -51,7 +51,7 @@ if event == 'death':
 #    death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_.csv')
 #    death_higher = death_higher.rename(columns=death_higher.loc[0,:])
 #    death_higher = (death_higher.drop(index=0))#.drop('01/22/0020',axis=1)
-    realdata_death = realdata = pd.read_csv('data/new_death_cases.csv')
+    realdata_death = realdata = pd.read_csv('data/new_death_cases_2020_08_16.csv')
     
     
     for i in range(1,53):
@@ -59,9 +59,9 @@ if event == 'death':
         death_lower.loc[i,'3/15/20':] =  pd.to_numeric(death_lower.loc[i,'3/15/20':],errors='coerce')
         death_higher.loc[i,'3/15/20':] =  pd.to_numeric(death_higher.loc[i,'3/15/20':],errors='coerce')
 
-    death_mean.to_csv ('results/'+foldername+'_prediction/death_mean_2020_08_10.csv', index = False, header=True)
-    death_lower.to_csv ('results/'+foldername+'_prediction/death_lowerBound_2020_08_10.csv', index = False, header=True)
-    death_higher.to_csv ('results/'+foldername+'_prediction/death_upperBound_2020_08_10.csv', index = False, header=True)
+    death_mean.to_csv ('results/'+foldername+'_prediction/death_mean_2020_08_17.csv', index = False, header=True)
+    death_lower.to_csv ('results/'+foldername+'_prediction/death_lowerBound_2020_08_17.csv', index = False, header=True)
+    death_higher.to_csv ('results/'+foldername+'_prediction/death_upperBound_2020_08_17.csv', index = False, header=True)
 
     realdata_death.loc[51] = realdata_death.sum(axis=0)
     realdata_death["Province_State"].loc[51] = "US"
@@ -72,15 +72,15 @@ if event == 'death':
    # results_death.to_csv ('results/Future_prediction/furture_death_.csv', index = True, header=True)
     
 
-    death_mean = pd.read_csv('results/'+foldername+'_prediction/death_mean_2020_08_10.csv')
+    death_mean = pd.read_csv('results/'+foldername+'_prediction/death_mean_2020_08_17.csv')
 
 
     death_mean.loc[51] = death_mean.loc[0:50].sum(axis=0)
     death_mean["Province_State"].loc[51] = "US"
 
 
-    death_lower = pd.read_csv('results/'+foldername+'_prediction/death_lowerBound_2020_08_10.csv')
-    death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_2020_08_10.csv')
+    death_lower = pd.read_csv('results/'+foldername+'_prediction/death_lowerBound_2020_08_17.csv')
+    death_higher = pd.read_csv('results/'+foldername+'_prediction/death_upperBound_2020_08_17.csv')
 
     death_mean_col = pd.melt(death_mean, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths')
     death_lower_col = pd.melt(death_lower, id_vars=['Province_State'], var_name='date', value_name='number_of_deaths_lower')
@@ -90,7 +90,7 @@ if event == 'death':
     results_death= pd.merge(results_death, death_higher_col, how='outer', on=['Province_State', 'date'])
     #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
 
-    results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_2020_08_10.csv', index = True, header=True)
+    results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_2020_08_17.csv', index = True, header=True)
 
     
 
@@ -112,7 +112,7 @@ else:
     cases_higher = cases_higher.iloc[:,:]
 
     cases_higher = (cases_higher.drop(index=0))#.drop('01/22/0020',axis=1)
-    realdata_cases = realdata = pd.read_csv('data/new_daily_cases.csv')
+    realdata_cases = realdata = pd.read_csv('data/new_daily_cases_2020_08_16.csv')
     
     
     for i in range(1,53):
@@ -120,9 +120,9 @@ else:
         cases_lower.loc[i,'3/15/20':] =  pd.to_numeric(cases_lower.loc[i,'3/15/20':],errors='coerce')
         cases_higher.loc[i,'3/15/20':] =  pd.to_numeric(cases_higher.loc[i,'3/15/20':],errors='coerce')
     
-    cases_mean.to_csv ('results/'+foldername+'_prediction/daily_cases_mean_2020_08_10.csv', index = False, header=True)
-    cases_lower.to_csv ('results/'+foldername+'_prediction/daily_cases_lowerBound_2020_08_10.csv', index = False, header=True)
-    cases_higher.to_csv ('results/'+foldername+'_prediction/daily_cases_upperBound_2020_08_10.csv', index = False, header=True)
+    cases_mean.to_csv ('results/'+foldername+'_prediction/daily_cases_mean_2020_08_17.csv', index = False, header=True)
+    cases_lower.to_csv ('results/'+foldername+'_prediction/daily_cases_lowerBound_2020_08_17.csv', index = False, header=True)
+    cases_higher.to_csv ('results/'+foldername+'_prediction/daily_cases_upperBound_2020_08_17.csv', index = False, header=True)
 
     realdata_cases.loc[51] = realdata_cases.sum(axis=0)
     realdata_cases["Province_State"].loc[51] = "US"
@@ -138,15 +138,15 @@ else:
 #    results_cases.to_csv ('results/'+foldername+'_prediction/furture_death_.csv', index = True, header=True)
     
 
-    cases_mean = pd.read_csv('results/'+foldername+'_prediction/daily_cases_mean_2020_08_10.csv')
+    cases_mean = pd.read_csv('results/'+foldername+'_prediction/daily_cases_mean_2020_08_17.csv')
 
 
     cases_mean.loc[51] = cases_mean.loc[0:50].sum(axis=0)
     cases_mean["Province_State"].loc[51] = "US"
 
 
-    cases_lower = pd.read_csv('results/'+foldername+'_prediction/daily_cases_lowerBound_2020_08_10.csv')
-    cases_higher = pd.read_csv('results/'+foldername+'_prediction/daily_cases_upperBound_2020_08_10.csv')
+    cases_lower = pd.read_csv('results/'+foldername+'_prediction/daily_cases_lowerBound_2020_08_17.csv')
+    cases_higher = pd.read_csv('results/'+foldername+'_prediction/daily_cases_upperBound_2020_08_17.csv')
 
     cases_mean_col = pd.melt(cases_mean, id_vars=['Province_State'], var_name='date', value_name='number_of_daily_cases')
     cases_lower_col = pd.melt(cases_lower, id_vars=['Province_State'], var_name='date', value_name='number_of_daily_cases_lower')
@@ -158,7 +158,7 @@ else:
 #    results_death= pd.merge(death_mean_col, death_lower_col, how='outer', on=['Province_State', 'date'])
 #    results_death= pd.merge(results_death, death_higher_col, how='outer', on=['Province_State', 'date'])
 
-    results_cases.to_csv ('results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_10.csv', index = True, header=True)
+    results_cases.to_csv ('results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_17.csv', index = True, header=True)
 
     
 

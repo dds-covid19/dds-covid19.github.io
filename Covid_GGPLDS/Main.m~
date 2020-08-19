@@ -6,7 +6,7 @@ addAllToPath()
 dataset_name = 'Covid19_newcases'% 'Lorenz','Pedestrian','Stock'
 %chose the task
 task = 'prediction_future'% 'interpretation','predeiction_historic', 'prediction_future'
-TypeofEvent =  'cases';%'cases'
+TypeofEvent =  'death';%'cases'
 % data reconstruction (time consuming due to Kalman smoothing)
 data_reconstruction_flag = 'no'% 'yes','no'
 
@@ -89,14 +89,14 @@ elseif strcmp(dataset_name,'FHZ')
      
     %load('data/Covid19_newcase.mat')
     if strcmp(TypeofEvent , 'death')
-        TT = readtable('data/new_death_cases.csv');
+        TT = readtable('data/new_death_cases_2020_08_15.csv');
         LastCumDeath_T = readtable('data/last_cum_death_cases.csv');
         LCT = LastCumDeath_T{2:end,2};
         LCT_data = [];
         LCT_data=[LCT_data; cellfun(@str2num, LCT(:,1))];
         %TT2 = readtable('data/new_daily_cases.csv');
     elseif strcmp(TypeofEvent , 'cases')
-        TT = readtable('data/new_daily_cases.csv');
+        TT = readtable('data/new_daily_cases_2020_08_15.csv');
        % LastCumDeath_T = readtable('data/last_cum_cases.csv');
     end
     
@@ -676,17 +676,17 @@ else
             for j = 1:4
                 if j==1
                     TWS = 1;
-                    TWE = 6;
+                    TWE = 7;
                 elseif j<4
-                    TWS = 6 + 7*(j-2)+1;
-                    TWE = 6 + 7*(j-1);
+                    TWS = 7 + 7*(j-2)+1;
+                    TWE = 7 + 7*(j-1);
                 else
-                    TWS = 6 + 7*(j-2)+1;
+                    TWS = 7 + 7*(j-2)+1;
                     TWE = T_P;
                 end
                 for t =TWS:TWE
                     if t== TWS %%%%%%%%%%%haj
-                        XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:)+data5(:,end);
+                        XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:);%+data5(:,end);
                     else
                         XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:)+XP_temp_weekly(:,:,t-1,:);
                     end
@@ -708,7 +708,7 @@ else
             MyX_weekly = cat(1,MyX_weekly,US_avg_weekly);
         end
 
-<<<<<<< HEAD
+
         
         
        

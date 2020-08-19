@@ -111,11 +111,8 @@ if event == 'death':
 
     #results_death= pd.merge(results_death, real_death_col, how='outer', on=['Province_State', 'date'])
     #results_death.to_csv ('results/'+foldername+'_prediction/'+foldername+'__death_cum.csv', index = True, header=True)
-<<<<<<< HEAD
-=======
-    
-    #daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
->>>>>>> 2303a3eed4fe5f9b277d4c6f16ea04ccc5aed08d
+
+
     
     #daily_cases_weekly = pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly1.csv')
     
