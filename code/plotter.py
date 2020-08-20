@@ -23,7 +23,7 @@ import pandas as pd
 import numpy as np 
 
 task = 'future' #'historic''future'
-event = 'death'#'cases''death'
+event = 'cases'#'cases''death'
 if task == 'historic':
     foldername = 'Historic'
 else:
@@ -87,7 +87,7 @@ if event == 'death':
         fig.add_trace(go.Scatter(
             x=x_prediction,
             y=y_prediction,
-            name = state_names[i]+ ' forecase mean', # Style name/legend entry with html tags
+            name = state_names[i]+ ' forecast mean', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
@@ -160,7 +160,7 @@ else:
         fig.add_trace(go.Scatter(
             x=x_prediction,
             y=y_prediction,
-            name = state_names[i]+ ' forecase mean', # Style name/legend entry with html tags
+            name = state_names[i]+ ' forecast mean', # Style name/legend entry with html tags
             connectgaps=True # override default to connect the gaps
         ))
         
