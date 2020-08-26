@@ -47,6 +47,13 @@ if event == 'death':
     death_mean = pd.read_csv('results/'+foldername+'_prediction/death_cum.csv')
     death_weekly  =  pd.read_csv('results/'+foldername+'_prediction/death_weekly.csv')
     daily_cases_weekly  =  pd.read_csv('results/'+foldername+'_prediction/daily_cases_weekly.csv')
+    death_mean.drop(death_mean.loc[death_mean['Var1']=='StateX'].index, inplace=True)
+    death_mean =death_mean.reset_index(drop=True)
+    death_weekly.drop(death_weekly.loc[death_weekly['Var1']=='StateX'].index, inplace=True)
+    death_weekly =death_weekly.reset_index(drop=True)
+    daily_cases_weekly.drop(daily_cases_weekly.loc[daily_cases_weekly['Var1']=='StateX'].index, inplace=True)
+    daily_cases_weekly =daily_cases_weekly.reset_index(drop=True)
+    
     
     death_mean = death_mean.rename(columns=death_mean.loc[0,:])
     death_mean=(death_mean.drop(index=0))#.drop('01/22/0020',axis=1)

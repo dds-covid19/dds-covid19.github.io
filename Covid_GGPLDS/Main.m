@@ -89,14 +89,14 @@ elseif strcmp(dataset_name,'FHZ')
      
     %load('data/Covid19_newcase.mat')
     if strcmp(TypeofEvent , 'death')
-        TT = readtable('data/new_death_cases_2020_08_16.csv');
+        TT = readtable('data/new_death_cases_2020_08_23.csv');
         LastCumDeath_T = readtable('data/last_cum_death_cases.csv');
         LCT = LastCumDeath_T{2:end,2};
         LCT_data = [];
         LCT_data=[LCT_data; cellfun(@str2num, LCT(:,1))];
         %TT2 = readtable('data/new_daily_cases.csv');
     elseif strcmp(TypeofEvent , 'cases')
-        TT = readtable('data/new_daily_cases_2020_08_16.csv');
+        TT = readtable('data/new_daily_cases_2020_08_23.csv');
        % LastCumDeath_T = readtable('data/last_cum_cases.csv');
     end
     
@@ -901,13 +901,13 @@ else
 
                     if i ==1
                         temp = data;
-                        temp.Var2= cat(1,cellstr('type'),cellstr(repmat('point',52,1)));
+                        temp.Var2= cat(1,cellstr('type'),cellstr(repmat('point',53,1)));
                         T_cum = [temp(:,1),temp(:,end),temp(:,2:end-1)];
                         T_cum{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
                         T_cum{2:end,T_initial+1:T_initial+T_S+T_P}=num2cell(MyX_cum);
                     else
                         temp = data;
-                        temp.Var2= cat(1,cellstr('type'),cellstr(repmat(num2str(q_list(i-1)),52,1)));
+                        temp.Var2= cat(1,cellstr('type'),cellstr(repmat(num2str(q_list(i-1)),53,1)));
                         temp = [temp(:,1),temp(:,end),temp(:,2:end-1)];
                         temp{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
                         temp{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(squeeze(state_Bound_cum(:,i-1,:)));
@@ -929,13 +929,13 @@ else
                 
                 if i ==1
                     temp = data;
-                    temp.Var2= cat(1,cellstr('type'),cellstr(repmat('point',52,1)));
+                    temp.Var2= cat(1,cellstr('type'),cellstr(repmat('point',53,1)));
                     T_weekly = [temp(:,1),temp(:,end),temp(:,2:end-1)];
                     T_weekly{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
                     T_weekly{2:end,T_initial+1:T_initial+T_S+T_P}=num2cell(MyX_weekly);
                 else
                     temp = data;
-                    temp.Var2= cat(1,cellstr('type'),cellstr(repmat(num2str(q_list(i-1)),52,1)));
+                    temp.Var2= cat(1,cellstr('type'),cellstr(repmat(num2str(q_list(i-1)),53,1)));
                     temp = [temp(:,1),temp(:,end),temp(:,2:end-1)];
                     temp{1,T_initial+T_S+1:T_initial+T_S+T_P} = cellstr(last_day+1:last_pred_day);
                     temp{2:end,T_initial+T_S+1:T_initial+T_S+T_P}=num2cell(squeeze(state_Bound_weekly(:,i-1,:)));
