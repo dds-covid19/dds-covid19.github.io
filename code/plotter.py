@@ -23,7 +23,7 @@ import pandas as pd
 import numpy as np 
 
 task = 'future' #'historic''future'
-event = 'cases'#'cases''death'
+event = 'death'#'cases''death'
 if task == 'historic':
     foldername = 'Historic'
 else:
@@ -37,7 +37,7 @@ else:
 if event == 'death':
     
 
-    death_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__'+sfilename+'_2020_08_24.csv').drop('Unnamed: 0', axis=1)
+    death_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__'+sfilename+'_2020_08_31.csv').drop('Unnamed: 0', axis=1)
     state_names = np.unique(death_['Province_State'])
     temp=np.append(state_names[44],state_names[0:44])
     state_names=np.append(temp,state_names[45:])
@@ -116,7 +116,7 @@ if event == 'death':
 else:
 
 
-    cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_24.csv').drop('Unnamed: 0', axis=1)
+    cases_ = pd.read_csv('../Covid_GGPLDS/results/'+foldername+'_prediction/'+foldername+'__daily_cases_2020_08_31.csv').drop('Unnamed: 0', axis=1)
 
     state_names = np.unique(cases_['Province_State'])
     temp=np.append(state_names[44],state_names[0:44])

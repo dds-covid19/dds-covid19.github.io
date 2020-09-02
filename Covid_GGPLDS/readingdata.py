@@ -32,6 +32,6 @@ df2.loc[51]=temp
 df2 = df2.rename({51: 'StateX'}, axis='index')
 new_daily_cases = df2 - df2.shift(1,axis=1)
 new_daily_cases[new_daily_cases<0]=0
-new_death_cases.to_csv ('data/new_death_cases_2020_08_23.csv', index = True, header=True)
-new_daily_cases.to_csv ('data/new_daily_cases_2020_08_23.csv', index = True, header=True)
+new_death_cases.to_csv ('data/new_death_cases_2020_08_30.csv', index = True, header=True)
+new_daily_cases.to_csv ('data/new_daily_cases_2020_08_30.csv', index = True, header=True)
 last_day_cum_death.to_csv('data/last_cum_death_cases.csv', index = True, header=True)

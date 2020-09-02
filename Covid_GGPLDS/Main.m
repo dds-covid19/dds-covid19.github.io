@@ -89,14 +89,14 @@ elseif strcmp(dataset_name,'FHZ')
      
     %load('data/Covid19_newcase.mat')
     if strcmp(TypeofEvent , 'death')
-        TT = readtable('data/new_death_cases_2020_08_23.csv');
+        TT = readtable('data/new_death_cases_2020_08_30.csv');
         LastCumDeath_T = readtable('data/last_cum_death_cases.csv');
         LCT = LastCumDeath_T{2:end,2};
         LCT_data = [];
         LCT_data=[LCT_data; cellfun(@str2num, LCT(:,1))];
         %TT2 = readtable('data/new_daily_cases.csv');
     elseif strcmp(TypeofEvent , 'cases')
-        TT = readtable('data/new_daily_cases_2020_08_23.csv');
+        TT = readtable('data/new_daily_cases_2020_08_30.csv');
        % LastCumDeath_T = readtable('data/last_cum_cases.csv');
     end
     
@@ -692,6 +692,25 @@ else
                     end
                 end
             end
+%             for j = 1:4
+%                 if j==1
+%                     TWS = 1;
+%                     TWE = 7;
+%                 elseif j<4
+%                     TWS = 7 + 7*(j-2)+1;
+%                     TWE = 7 + 7*(j-1);
+%                 else
+%                     TWS = 7 + 7*(j-2)+1;
+%                     TWE = T_P;
+%                 end
+%                 for t =TWS:TWE
+%                     if t== TWS %%%%%%%%%%%haj
+%                         XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:);
+%                     else
+%                         XP_temp_weekly(:,:,t,:)=XP_temp(:,:,t,:)+XP_temp_weekly(:,:,t-1,:);
+%                     end
+%                 end
+%             end
             X_reconp_avg_weekly = (squeeze(mean(mean(XP_temp_weekly,4),2)));
             MyX_weekly = cat(2, X_recon_avg, (X_reconp_avg_weekly));
             %TrX = cat(2, TRdata, TEdata);
